@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { PriceLine } from './../../../models/price-line.model';
-import { D3PriceChartService } from '../../../services/d3/d3-price-chart.service';
-import { D3CurveShapeService } from '../../../services/d3/d3-curve-shape.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { PriceLine } from './../../models/price-line.model';
+import { D3PriceChartService } from '../../services/d3/d3-price-chart.service';
+import { D3CurveShapeService } from '../../services/d3/d3-curve-shape.service';
 import { ChartComponent } from '../charts/../chart/chart.component';
-import { ScalingService } from '../../../services/scaling.service';
-import { IconSettingsService } from '../../../services/settings/icon-settings.service';
-import { ChartSettingsService } from '../../../services/settings/chart-settings.service';
-import { MessageService } from '../../../services/message.service';
+import { ScalingService } from '../../services/scaling.service';
+import { IconSettingsService } from '../../services/settings/icon-settings.service';
+import { ChartSettingsService } from '../../services/settings/chart-settings.service';
+import { MessageService } from '../../services/message.service';
 
 
 @Component({
@@ -26,8 +26,8 @@ export class PriceChartComponent extends ChartComponent implements OnInit {
                 private d3CurveShapeService: D3CurveShapeService,
                 private scalingService: ScalingService,
                 private iconSettingsService: IconSettingsService,
-                protected chartSettingsService: ChartSettingsService,
-                protected messageService: MessageService) {
+                protected override chartSettingsService: ChartSettingsService,
+                protected override messageService: MessageService) {
                     super(d3PriceChartService, chartSettingsService, messageService);
                 }
 
@@ -64,12 +64,12 @@ export class PriceChartComponent extends ChartComponent implements OnInit {
     /**
      * Chart sizing
      */
-    protected sizeChartUp() {
+    protected override sizeChartUp() {
         super.sizeChartUp();
         this.d3PriceChartService.buildChart();
     }
 
-    protected sizeChartDown() {
+    protected override sizeChartDown() {
         super.sizeChartDown();
         this.d3PriceChartService.buildChart();
     }

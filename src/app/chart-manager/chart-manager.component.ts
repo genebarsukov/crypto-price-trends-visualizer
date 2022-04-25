@@ -1,23 +1,18 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
-import { PriceLine } from './../../models/price-line.model';
-import { PriceDataService } from '../../services/price-data.service';
+import { PriceLine } from '../models/price-line.model';
+import { PriceDataService } from '../services/price-data.service';
 import { RSIComponent } from '../charts/rsi/rsi.component';
 import { StochasticComponent } from '../charts/stochastic/stochastic.component';
 import { MACDComponent } from '../charts/macd/macd.component';
-import { ChartComponent } from '../charts/chart/chart.component';
-import { ScalingService } from '../../services/scaling.service';
-import { CurrentPricePercentComponent } from '../current-price-percent/current-price-percent.component';
-import { SettingsModalComponent } from '../modals/settings-modal/settings-modal.component';
-import { ChartSettingsService } from '../../services/settings/chart-settings.service';
+import { CurrentPricePercentComponent } from '../data-series-meta-controls/current-price-percent/current-price-percent.component';
+import { ChartSettingsService } from '../services/settings/chart-settings.service';
 import { PriceChartComponent } from '../charts/price-chart/price-chart.component';
 import { SpreadChartComponent } from '../charts/spread-chart/spread-chart.component';
 import { AlgoTesterComponent } from '../algo-tester/algo-tester.component';
-import { TimeSettingsComponent } from '../time-settings/time-settings.component';
-import { ErrorService } from '../../services/error.service';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { MessageService } from '../../services/message.service';
+import { TimeSettingsComponent } from '../data-series-meta-controls//time-settings/time-settings.component';
+import { MessageService } from '../services/message.service';
+import { ChartData } from '../models/chart-data.model';
 
 
 @Component({
@@ -29,16 +24,26 @@ import { MessageService } from '../../services/message.service';
     viewProviders: [DragulaService],
 })
 export class ChartManagerComponent implements OnInit {
-    @ViewChild('horizontalRuler') horizontalRuler: ElementRef;
-    @ViewChild('verticalRuler') verticalRuler: ElementRef;
-    @ViewChild('priceChartComponent') priceChartComponent: PriceChartComponent;
-    @ViewChild('rsiComponent') rsiComponent: RSIComponent;
-    @ViewChild('stochasticComponent') stochasticComponent: StochasticComponent;
-    @ViewChild('macdComponent') macdComponent: MACDComponent;
-    @ViewChild('spreadChartComponent') spreadChartComponent: SpreadChartComponent;
-    @ViewChild('currentPricePercentComponent') currentPricePercentComponent: CurrentPricePercentComponent;
-    @ViewChild('algoTester') algoTesterComponent: AlgoTesterComponent;
-    @ViewChild('timeSettings') timeSettingsComponent: TimeSettingsComponent;
+    @ViewChild('horizontalRuler')
+    horizontalRuler!: ElementRef;
+    @ViewChild('verticalRuler')
+    verticalRuler!: ElementRef;
+    @ViewChild('priceChartComponent')
+    priceChartComponent!: PriceChartComponent;
+    @ViewChild('rsiComponent')
+    rsiComponent!: RSIComponent;
+    @ViewChild('stochasticComponent')
+    stochasticComponent!: StochasticComponent;
+    @ViewChild('macdComponent')
+    macdComponent!: MACDComponent;
+    @ViewChild('spreadChartComponent')
+    spreadChartComponent!: SpreadChartComponent;
+    @ViewChild('currentPricePercentComponent')
+    currentPricePercentComponent!: CurrentPricePercentComponent;
+    @ViewChild('algoTester')
+    algoTesterComponent!: AlgoTesterComponent;
+    @ViewChild('timeSettings')
+    timeSettingsComponent!: TimeSettingsComponent;
     
     private horizontalRulerHidden: boolean = true;
     private verticalRulerHidden: boolean = true;
@@ -51,7 +56,7 @@ export class ChartManagerComponent implements OnInit {
     private isLoading: boolean = false;
     private initSetup: boolean = true;
     private errorMessage: string = '';
-    private algoTesterIsShown: boolean;
+    private algoTesterIsShown!: boolean;
 
     private row1: any = [];
     private row2: any = [];
@@ -91,17 +96,18 @@ export class ChartManagerComponent implements OnInit {
         this.row2.push('CurrentPricePercent');
         this.row5.push('TimeSettings');
 
-        this.dragulaService.setOptions('bag', {
+        this.dragulaService.createGroup('bag', {
             invalid: (el: any, handle: any) => el.classList.contains('undraggable')
         });
 
         this.lines.push(this.buildNewLine());
 
         this.priceDataService.getDataStream().subscribe(
-            dataResponse => {
-                if (dataResponse && dataResponse.data && dataResponse.data.length) {
-                    this.lines[dataResponse.index].data = dataResponse.data;
+            (dataResponse: { data: ChartData[]; index: string | number; }) => {
+                if (dataResponse && dataResponse.data && dataResponse.data) {
+                    this.lines[dataResponse.index as number].data = dataResponse.data;
 
+                    let p = this.lines[dataResponse.index as number]
                     if (this.dataRequests > 0) {
                         this.dataRequests--;
                         if (this.dataRequests === 0) {
@@ -126,7 +132,7 @@ export class ChartManagerComponent implements OnInit {
                     this.timeSettingsComponent.enableSlider();
                 }
             },
-            error => {
+            (error: any) => {
                 console.log(error);
                 this.timeSettingsComponent.enableSlider();
             }
@@ -134,9 +140,9 @@ export class ChartManagerComponent implements OnInit {
         this.turnOnLoading();
         this.priceDataService.getPriceData(this.lines[this.lines.length - 1]);
 
-        this.dragulaService.over.subscribe((value: any) => { this.onOver(value.slice(1)); });
-        this.dragulaService.out.subscribe((value: any) => { this.onOut(value.slice(1)); });
-        this.dragulaService.drop.subscribe((value: any) => { this.onDrop(value.slice(1)); });
+        this.dragulaService.over().subscribe((value: any) => { this.onOver(value.slice(1)); });
+        this.dragulaService.out().subscribe((value: any) => { this.onOut(value.slice(1)); });
+        this.dragulaService.drop().subscribe((value: any) => { this.onDrop(value.slice(1)); });
 
     }
 

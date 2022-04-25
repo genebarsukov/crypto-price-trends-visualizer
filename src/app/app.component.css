@@ -1,0 +1,17 @@
+.app-title {
+    padding-bottom: 15px;
+}
+
+.settings-button-container {
+    z-index: 400;
+    position: fixed;
+    top: 7px;
+    right: 55px;
+}
+
+.help-button-container {
+    z-index: 400;
+    position: fixed;
+    top: 7px;
+    right: 10px;
+}

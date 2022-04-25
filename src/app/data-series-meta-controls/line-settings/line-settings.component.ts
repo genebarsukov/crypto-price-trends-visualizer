@@ -12,7 +12,8 @@ import { IconSettingsService } from '../../services/settings/icon-settings.servi
     ]
 })
 export class LineSettingsComponent implements OnInit {
-    @Input() priceLine: PriceLine;
+    @Input()
+    priceLine!: PriceLine;
 
     @Output() onRebuildSvg = new EventEmitter();
     @Output() onColorUpdated = new EventEmitter();

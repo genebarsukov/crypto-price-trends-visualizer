@@ -21,7 +21,7 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 })
 export class ColorPickerComponent implements ControlValueAccessor  {
     private paletteHidden: boolean = true;
-    private selectedColor: string;
+    private selectedColor!: string;
     propagateChange = (color: string) => {};
     private colors: Object = {
         blues: [

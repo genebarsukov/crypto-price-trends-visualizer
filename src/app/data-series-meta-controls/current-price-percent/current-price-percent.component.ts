@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PriceLine } from '../../models/price-line.model';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ChartSettingsService } from '../../services/settings/chart-settings.service';
 
 
@@ -13,11 +12,12 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 })
 
 export class CurrentPricePercentComponent implements OnInit {
-    @Input() priceLine: PriceLine;
+    @Input()
+    priceLine!: PriceLine;
     private price: number = 100;
     private pastPrice: number = 100;
-    private percent: number;
-    private percentArrow: string;
+    private percent!: number;
+    private percentArrow!: string;
 
 
     constructor(private chartSettingsService: ChartSettingsService) {}

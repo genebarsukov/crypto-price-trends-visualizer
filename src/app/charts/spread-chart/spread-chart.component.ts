@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { PriceLine } from './../../../models/price-line.model';
+import { PriceLine } from './../../models/price-line.model';
 import { ChartComponent } from '../charts/../chart/chart.component';
-import { ScalingService } from '../../../services/scaling.service';
-import { D3SpreadChartService } from '../../../services/d3/d3-spread-chart.service';
-import { ChartData } from '../../../models/chart-data.model';
-import { ErrorService } from '../../../services/error.service';
-import { IconSettingsService } from '../../../services/settings/icon-settings.service';
-import { ChartSettingsService } from '../../../services/settings/chart-settings.service';
-import { MessageService } from '../../../services/message.service';
-// import { setTimeout } from 'timers';
+import { ScalingService } from '../../services/scaling.service';
+import { D3SpreadChartService } from '../../services/d3/d3-spread-chart.service';
+import { ChartData } from '../../models/chart-data.model';
+import { ErrorService } from '../../services/error.service';
+import { IconSettingsService } from '../../services/settings/icon-settings.service';
+import { ChartSettingsService } from '../../services/settings/chart-settings.service';
+import { MessageService } from '../../services/message.service';
 
 
 @Component({
@@ -33,8 +32,8 @@ export class SpreadChartComponent extends ChartComponent implements OnInit {
                 private scalingService: ScalingService,
                 private errorService: ErrorService,
                 private iconSettingsService: IconSettingsService,
-                protected chartSettingsService: ChartSettingsService,
-                protected messageService: MessageService) {
+                protected override chartSettingsService: ChartSettingsService,
+                protected override messageService: MessageService) {
         super(d3SpreadChartService, chartSettingsService, messageService);
     }
 
@@ -94,21 +93,21 @@ export class SpreadChartComponent extends ChartComponent implements OnInit {
         this.updateChart();
     }
 
-    public updateColor(priceLine: PriceLine) {
+    public override updateColor(priceLine: PriceLine) {
         this.updateChart();
     }
 
     /**
      * Chart sizing
      */
-    protected sizeChartUp() {
+    protected override sizeChartUp() {
         super.sizeChartUp();
         if (this.lines.length >= 2) {
             this.d3SpreadChartService.buildChart();
         }
     }
 
-    protected sizeChartDown() {
+    protected override sizeChartDown() {
         super.sizeChartDown();
         if (this.lines.length >= 2) {
             this.d3SpreadChartService.buildChart();

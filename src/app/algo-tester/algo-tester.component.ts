@@ -1,16 +1,16 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { D3AlgoTesterService } from '../../services/d3/d3-algo-tester.service';
-import { ChartSettingsService } from '../../services/settings/chart-settings.service';
-import { ErrorService } from '../../services/error.service';
-import { optimizations } from './optimizations';
+import { D3AlgoTesterService } from '../services/d3/d3-algo-tester.service';
+import { ChartSettingsService } from '../services/settings/chart-settings.service';
+import { ErrorService } from '../services/error.service';
+import { Optimizations, optimizations } from './optimizations';
 
 
 @Component({
     selector: 'app-algo-tester',
-    templateUrl: 'app/components/algo-tester/algo-tester.component.html',
+    templateUrl: './algo-tester.component.html',
     styleUrls: [
-        'app/components/algo-tester/algo-tester.component.scss'
+        './algo-tester.component.scss'
     ]
 })
 
@@ -36,7 +36,7 @@ export class AlgoTesterComponent implements OnInit {
     ];
     private excludedHeadings: string[] = ['chartType', 'index', 'render'];
     private indicators: string[] = [];
-    private selectedIndicator: string;
+    private selectedIndicator!: string;
     private testResults: any[] = [];
     private optimizationResults: any[] = [];
     private algoProfit: number = 0;
@@ -58,12 +58,12 @@ export class AlgoTesterComponent implements OnInit {
 
     ngOnInit() {
         this.chartSettingsService.getStream().subscribe(
-            setting => {
+            (setting: string) => {
                 if (setting == 'chart') {
                     this.updateParameters();
                 }
             },
-            error => {
+            (error: any) => {
                 console.log(error);
             }
         )
@@ -209,7 +209,7 @@ export class AlgoTesterComponent implements OnInit {
         this.clearOverlays();
         
         // optimizations is a separately loaded object that contains the settings for all of the optimizations
-        let selectedOptimization = optimizations[this.selectedIndicator];
+        let selectedOptimization = optimizations[this.selectedIndicator as keyof Optimizations];
 
         let chartSettings = {}
         let settingsList: any[] = [];
@@ -317,7 +317,7 @@ export class AlgoTesterComponent implements OnInit {
         let newSettings = {};
 
         for (let settingKey of settingsKeys) {
-            newSettings[settingKey] = chartSettings[settingKey];
+            newSettings[settingKey as keyof Object] = chartSettings[settingKey];
         }
         this.buildchartSettings(selectedOptimization, key, index + 1, newSettings, settingsList);
         this.buildchartSettings(selectedOptimization, nextKey, 0, chartSettings, settingsList);

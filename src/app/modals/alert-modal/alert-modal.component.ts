@@ -1,6 +1,6 @@
 import { Component, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { ChartSettingsService } from '../../../services/settings/chart-settings.service';
+import { ChartSettingsService } from '../../services/settings/chart-settings.service';
 
 @Component({
     selector: 'app-alert-modal',
@@ -14,10 +14,14 @@ host: {
 })
 
 export class AlertModalComponent {
-    @Input() messageHeader: string;
-    @Input() messageText: string;
-    @Input() messageButtonText: string;
-    @Input() isShown: boolean;
+    @Input()
+    messageHeader!: string;
+    @Input()
+    messageText!: string;
+    @Input()
+    messageButtonText!: string;
+    @Input()
+    isShown!: boolean;
 
     @Output() onModalDismissed: EventEmitter<string> = new EventEmitter();
 

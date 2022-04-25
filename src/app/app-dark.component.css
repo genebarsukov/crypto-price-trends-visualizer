@@ -1,0 +1,11 @@
+.app-container {
+    min-height: 100vh;
+}
+
+.dark.app-container {
+    background-color: #152127;
+}
+
+.dark body {
+    background-color: #152127;
+}

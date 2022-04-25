@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PriceLine } from './../../../models/price-line.model';
-import { ChartData } from './../../../models/chart-data.model';
+import { PriceLine } from './../../models/price-line.model';
+import { ChartData } from './../../models/chart-data.model';
 import { ChartComponent } from '../chart/chart.component';
-import { D3MACDService } from '../../../services/d3/d3-macd.service';
-import { MACDData } from '../../../models/macd-data.model';
-import { IconSettingsService } from '../../../services/settings/icon-settings.service';
-import { ChartSettingsService } from '../../../services/settings/chart-settings.service';
-import { MessageService } from '../../../services/message.service';
+import { D3MACDService } from '../../services/d3/d3-macd.service';
+import { MACDData } from '../../models/macd-data.model';
+import { IconSettingsService } from '../../services/settings/icon-settings.service';
+import { ChartSettingsService } from '../../services/settings/chart-settings.service';
+import { MessageService } from '../../services/message.service';
 
 
 @Component({
@@ -18,7 +18,8 @@ import { MessageService } from '../../../services/message.service';
 })
 
 export class MACDComponent extends ChartComponent implements OnInit {
-    @Input() priceLine: PriceLine;
+    @Input()
+    priceLine!: PriceLine;
 
     private chartData: MACDData[] = [];
     private smallPeriod: number = 12;
@@ -27,8 +28,8 @@ export class MACDComponent extends ChartComponent implements OnInit {
 
     constructor(private d3MACDService: D3MACDService,
                 private iconSettingsService: IconSettingsService,
-                protected chartSettingsService: ChartSettingsService,
-                protected messageService: MessageService) {
+                protected override chartSettingsService: ChartSettingsService,
+                protected override messageService: MessageService) {
         super(d3MACDService, chartSettingsService, messageService);
     }
 
@@ -125,7 +126,7 @@ export class MACDComponent extends ChartComponent implements OnInit {
     /**
      * Increase chart size
      */
-    protected sizeChartUp() {
+    protected override sizeChartUp() {
         super.sizeChartUp();
         this.d3MACDService.clearSvg();
         this.d3MACDService.buildChart();
@@ -134,7 +135,7 @@ export class MACDComponent extends ChartComponent implements OnInit {
     /**
      * Decrease chart size
      */
-    protected sizeChartDown() {
+    protected override sizeChartDown() {
         super.sizeChartDown();
         this.d3MACDService.clearSvg();
         this.d3MACDService.buildChart();

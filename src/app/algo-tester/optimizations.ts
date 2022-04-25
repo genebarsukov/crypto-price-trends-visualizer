@@ -1,4 +1,23 @@
-export const optimizations = {
+export interface MomentumProps {
+    smallPeriod: number[];
+    largePeriod: number[];
+    signalPeriod: number[];
+}
+
+export interface OscillatorProps {
+    period: number[];
+    overbought: number[];
+    oversold: number[];
+    SMAPeriod: number[]
+}
+
+export interface Optimizations {
+    RSI: OscillatorProps;
+    Stochastic: OscillatorProps;
+    MACD: MomentumProps
+}
+
+export const optimizations: Optimizations = {
     RSI: {
         period: [14, 12, 7],
         overbought: [70, 90, 80],

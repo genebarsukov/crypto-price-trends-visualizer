@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { D3ChartService } from '../../../services/d3/d3-chart.service';
-import { PriceLine } from '../../../models/price-line.model';
-import { MessageService } from '../../../services/message.service';
-import { ChartSettingsService } from '../../../services/settings/chart-settings.service';
+import { Component } from '@angular/core';
+import { D3ChartService } from '../../services/d3/d3-chart.service';
+import { PriceLine } from '../../models/price-line.model';
+import { MessageService } from '../../services/message.service';
+import { ChartSettingsService } from '../../services/settings/chart-settings.service';
 
 @Component({
     selector: 'app-chart',
@@ -51,7 +51,7 @@ export class ChartComponent {
     }
 
     public closeChart(chart: string) {
-        let chartSetting = this.chartSettingsService.getChartSettings()[chart];
+        let chartSetting = this.chartSettingsService.getChartSettings()[chart as keyof Object] as unknown as { name: string; active: boolean };
         if (chartSetting !== null) {
             chartSetting.active = false;
             this.messageService.setMessage("You can re-enable this chart by using the Settings &#9881; in the top right.");

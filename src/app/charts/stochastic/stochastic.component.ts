@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PriceLine } from './../../../models/price-line.model';
-import { ChartData } from './../../../models/chart-data.model';
-import { D3StochasticService } from '../../../services/d3/d3-stochastic.service';
+import { PriceLine } from './../../models/price-line.model';
+import { ChartData } from './../../models/chart-data.model';
+import { D3StochasticService } from '../../services/d3/d3-stochastic.service';
 import { ChartComponent } from '../chart/chart.component';
-import { IconSettingsService } from '../../../services/settings/icon-settings.service';
-import { ChartSettingsService } from '../../../services/settings/chart-settings.service';
-import { MessageService } from '../../../services/message.service';
+import { IconSettingsService } from '../../services/settings/icon-settings.service';
+import { ChartSettingsService } from '../../services/settings/chart-settings.service';
+import { MessageService } from '../../services/message.service';
 
 
 @Component({
@@ -17,7 +17,8 @@ import { MessageService } from '../../../services/message.service';
 })
 
 export class StochasticComponent extends ChartComponent implements OnInit {
-    @Input() priceLine: PriceLine;
+    @Input()
+    priceLine!: PriceLine;
 
     private stochasticData: ChartData[] = [];
     private period: number = 14;
@@ -28,8 +29,8 @@ export class StochasticComponent extends ChartComponent implements OnInit {
 
     constructor(private d3StochasticSrvice: D3StochasticService,
                 private iconSettingsService: IconSettingsService,
-                protected chartSettingsService: ChartSettingsService,
-                protected messageService: MessageService) {
+                protected override chartSettingsService: ChartSettingsService,
+                protected override messageService: MessageService) {
         super(d3StochasticSrvice, chartSettingsService, messageService);
     }
 
@@ -123,7 +124,14 @@ export class StochasticComponent extends ChartComponent implements OnInit {
             }
             K = this.findSMA(K, convertedData, this.SMAPeriod);
 
-            convertedData.push({ date: data[index].date, value: K });
+            convertedData.push({
+                date: data[index].date,
+                value: K,
+                open: K,
+                close: K,
+                high: K,
+                low: K
+            });
         }
         return convertedData;
     }
@@ -174,13 +182,13 @@ export class StochasticComponent extends ChartComponent implements OnInit {
         return dataCopy;
     }
 
-    protected sizeChartUp() {
+    protected override sizeChartUp() {
         super.sizeChartUp();
         this.d3StochasticSrvice.clearSvg();
         this.d3StochasticSrvice.buildChart();
     }
 
-    protected sizeChartDown() {
+    protected override sizeChartDown() {
         super.sizeChartDown();
         this.d3StochasticSrvice.clearSvg();
         this.d3StochasticSrvice.buildChart();

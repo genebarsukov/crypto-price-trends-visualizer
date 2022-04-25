@@ -32,7 +32,8 @@ export class TextPickerComponent implements ControlValueAccessor  {
     @Input() customInputClass: string = '';
     @Input() customListClass: string = '';
     @Input() customItemClass: string = '';
-    @Input() items: any[];
+    @Input()
+    items!: any[];
 
 
     constructor(private elementRef: ElementRef, 
