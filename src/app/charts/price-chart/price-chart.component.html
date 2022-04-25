@@ -1,0 +1,58 @@
+<div class="control-container padded-top-5 price-chart-control-container" [ngClass]="chartSettingsService.getTheme()">
+    <div class="chart-settings-container price-chart-settings-container">
+
+        <div class="chart-label">
+            <div *ngFor="let line of lines" 
+                 class="icon-group" 
+                 [style.background-color]="line.color">
+                <img class="from-symbol" [src]="iconSettingsService.getIconUrlBySymbol(line.fromSymbol, 'small')">
+                vs
+                <img class="to-symbol" [src]="iconSettingsService.getIconUrlBySymbol(line.toSymbol, 'small')">
+            </div>
+            Price
+        </div>
+
+        <div class="settings-container">
+            <span class="settings-text"> Area resolution </span> 
+            <div class="tooltip">
+                <input class="settings-input bg-white iterations-input" 
+                    type="number" 
+                    [(ngModel)]="shapeIterations" 
+                    (ngModelChange)="toggleCurveShape()">
+                <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Min-max price area resolution </span>
+            </div>
+            <div class="tooltip">
+                <button class="chart-control on-chart-button" 
+                        [class.selected]="d3CurveShapeService.chartBuilt"
+                        (click)="toggleCurveShape()">
+                    &#x2622;
+                </button>
+                <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Fill an area between price maxes and mins </span>
+            </div>
+        </div>
+
+        <div class="scale-buttons-container">
+            <button class="chart-control on-chart-button bg-white"
+                    [disabled]="svgWidth <= SVG_WIDTH_MIN"
+                    (click)="sizeChartDown()">
+                - 
+            </button>
+            <button class="chart-control on-chart-button bg-white left-100" 
+                    [disabled]="svgWidth >= SVG_WIDTH_MAX"
+                    (click)="sizeChartUp()">
+                +
+            </button>
+            <div class="h-spacer-10"></div>
+            <button class="chart-control remove-button" 
+                    (click)="closeChart('PriceChart')">
+                &#x2716;
+            </button>
+        </div>
+    </div>
+    <div class="svg-container price-chart-container">
+        <svg class="price-chart" 
+            [attr.width]="svgWidth" 
+            [attr.height]="svgHeight">
+        </svg>
+    </div>
+</div>

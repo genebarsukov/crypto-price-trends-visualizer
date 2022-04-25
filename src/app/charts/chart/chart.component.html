@@ -1,0 +1,16 @@
+<div class="svg-container">
+        <svg class="main-chart" 
+             [attr.width]="svgWidth" 
+             [attr.height]="svgHeight">
+        </svg>
+        <button class="chart-control w3-btn w3-border w3-border-blue on-chart-button bg-white"
+                [disabled]="svgWidth <= SVG_WIDTH_MIN"
+                (click)="sizeChartDown()">
+            - 
+        </button>
+        <button class="chart-control w3-btn w3-border w3-border-blue on-chart-button bg-white left-100" 
+                [disabled]="svgWidth >= SVG_WIDTH_MAX"
+                (click)="sizeChartUp()">
+            +
+        </button>
+    </div>

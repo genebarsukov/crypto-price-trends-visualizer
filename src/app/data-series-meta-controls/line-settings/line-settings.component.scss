@@ -1,0 +1,24 @@
+.line-settings-control-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 15px 0px 2px;
+}
+
+.currency-control.selected {
+    background-color: rgb(73, 152, 212);
+}
+
+.select-exchange,
+.select-coin {
+    width: 150px;
+    padding: 5px 16px;
+    border: none;
+    margin: 0px;
+    
+}
+
+.option-coin:disabled {
+    color: #BBB;
+}
+

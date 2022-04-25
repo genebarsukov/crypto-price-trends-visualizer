@@ -1,0 +1,60 @@
+<div class="control-container time-control-container" [ngClass]="chartSettingsService.getTheme()">
+    <div class="slider-container">
+        <div class="h-spacer-30"></div>
+        <div class="tooltip">
+            <input class="settings-input range-slider-input" type="text" [(ngModel)]="limit" (keydown.enter)="switchLimit($event)" min="15" max="1440"/>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> # of selected time units in current visible time period </span>
+        </div>
+        <div class="h-spacer-5"></div>
+
+        <div class="tooltip">
+            <button class="chart-control" [class.selected]="timeUnit=='day'" (click)="switchTimeUnit('day');"> Day </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Daily time unit increments </span>
+        </div>
+        <div class="h-spacer-5"></div>
+
+        <div class="tooltip">
+            <button class="chart-control" [class.selected]="timeUnit=='hour'"(click)="switchTimeUnit('hour');"> Hour </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Hourly time unit increments </span>
+        </div>
+        <div class="h-spacer-5"></div>
+        <div class="tooltip">
+            <button class="chart-control" [class.selected]="timeUnit=='minute'"(click)="switchTimeUnit('minute');"> Minute </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Minute time unit increments </span>
+        </div>
+        <div class="h-spacer-5"></div>
+
+        <div class="tooltip">
+            <input (input)="switchLimit($event)" 
+                   type="range" 
+                   min="15" 
+                   max="1440" 
+                   [(ngModel)]="limit" 
+                   step=10 
+                   class="slider" 
+                   (mousemove)="!sliderEnabled ? ($event.preventDefault ? $event.preventDefault() : $event.returnValue = false) : true"/>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Slide to adjust the currently visible time period </span>
+        </div>
+        <div class="h-spacer-5"></div>
+        <div class="time-settings-period-select-container">
+            <div class="tooltip">
+                <!-- <text-picker [items]="periods" 
+                             [(ngModel)]="selectedPeriod" 
+                             (ngModelChange)="updateData(selectedPeriod)">
+                </text-picker> -->
+                <select class="select-control time-settings-period-select" 
+                        [(ngModel)]="selectedPeriod" 
+                        (focusin)="updateData()"
+                        (ngModelChange)="updateData()">
+                    <option *ngFor="let period of periods" 
+                            class="time-settings-period-option" 
+                            [ngValue]="period">
+                        {{ period.name }}
+                    </option>
+                </select>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Displays approximate visible time period. Click to change to the exact selected time period </span>
+        </div>
+        </div>
+        <div class="h-spacer-30"></div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+.dark .text-picker-control-container:hover {
+    box-shadow:  1px 1px 10px 0px #999;
+}
+
+.dark .text-picker-input {
+    color: #FFF;
+    background: #263238; /* Old browsers */
+    background: -moz-linear-gradient(top, #263238 1%, #152127 15%, #152127 15%, rgb(28, 49, 65) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #263238 1%,#152127 15%,#152127 15%, rgb(28, 49, 65) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #263238 1%,#152127 15%,#152127 15%, rgb(28, 49, 65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fbfc', endColorstr='#8d8d8d',GradientType=0 ); /* IE6-9 */
+}
+
+.dark .item-list {
+    color: #FFF;
+    background-color: #263238;
+    box-shadow:  1px 1px 10px 0px #000;
+}
+
+.dark .list-item:not(.disabled):hover {
+    background-color: #152127;
+    color: rgb(204, 149, 30);
+}
+
+.dark .hidden {
+    display: none;
+}
+
+.dark .small-input {
+    background-color: #263238;
+    box-shadow:  1px 1px 10px 0px #000;
+}
+.dark .button-input:hover {
+    box-shadow:  1px 2px 7px 2px #555;
+}
+
+.dark .disabled {
+    background: #555;
+}

@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'assets/styles/buttons.scss';
+@import 'assets/styles/checkbox.scss';
+@import 'assets/styles/containers.scss';
+@import 'assets/styles/modals.scss';
+@import 'assets/styles/positioning.scss';
+@import 'assets/styles/radio.scss';
+@import 'assets/styles/shared.scss';
+@import 'assets/styles/spacers.scss';
+@import 'assets/styles/text.scss';
+@import 'assets/styles/tooltips.scss';
+
+h1 {
+    color: #369;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+}
+
+.app-loading-container {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.app-loading-text {
+    text-align: center;
+    font-size: 24pt;
+    font-family: "Arial Black";
+    width: 100%;
+    position: absolute;
+    display: block;
+    margin: auto;
+    color: #0099FF;
+    top: 20%;
+    text-shadow: 2px 2px 5px rgba(40,40,40,0.7);
+    left: 0;
+    right: 0;
+}

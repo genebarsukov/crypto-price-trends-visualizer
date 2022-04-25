@@ -1,0 +1,47 @@
+<div class="line-settings-control-container" [style.border-color]="priceLine.color" [ngClass]="chartSettingsService.getTheme()">
+
+    <div class="tooltip">
+        <color-picker [(ngModel)]="priceLine.color" (ngModelChange)="updateColor(priceLine.color)"></color-picker>
+        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Change line color </span>
+    </div>
+    <div class="h-spacer-10"></div>
+
+    <div class="tooltip">
+        <text-picker [items]="exchanges" 
+                     [(ngModel)]="priceLine.exchange" 
+                     (ngModelChange)="switchExchange(priceLine.exchange)">
+        </text-picker>
+        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Switch exchange </span>
+    </div>
+    <div class="h-spacer-10"></div>
+
+    <div class="tooltip">
+        <text-picker [items]="fromCoins" 
+                     (disabledCheck)="updateDisabled()"
+                     [(ngModel)]="priceLine.fromSymbol" 
+                     (ngModelChange)="switchFromSymbol(priceLine.fromSymbol)">
+        </text-picker>
+        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Switch Coin Type </span>
+    </div>
+
+    <div class="h-spacer-30"></div>
+    <div class="tooltip">
+        <text-picker [iconSize]="'medium'" 
+                     [customInputClass]="'small-input'"
+                     [customListClass]="'small-list'"
+                     [customItemClass]="'small-item'"
+                     [items]="toCoins" 
+                     (disabledCheck)="updateDisabled()"
+                     [(ngModel)]="priceLine.toSymbol" 
+                     (ngModelChange)="switchToSymbol(priceLine.toSymbol)">
+        </text-picker>
+        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Get price in US Dollars, Bitcoin, or Etherium where available </span>
+    </div>
+
+    <div class="h-spacer-15"></div>
+    <div class="tooltip">
+        <button class="chart-control remove-button" (click)="removeLine()"> &#x2716; </button>
+        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Delete this price data </span>
+    </div>
+
+</div>

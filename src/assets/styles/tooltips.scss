@@ -1,0 +1,60 @@
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    display: none;
+    width: 240px;
+    background-color: rgb(33, 150, 243);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 50%;
+    margin-left: -120px;
+    box-shadow:  2px 4px 10px 0px #555;
+    animation: fadein 2s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent rgb(33, 150, 243) transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    display: inline-block;
+}
+
+
+/*** Light Theme *****************************************************************************/
+.light .tooltip .tooltiptext {
+    background-color: rgb(33, 150, 243);
+    color: #FFF;
+    box-shadow:  2px 4px 10px 0px #555;
+}
+
+.light .tooltip .tooltiptext::after {
+    border-color: transparent transparent rgb(33, 150, 243) transparent;
+}
+
+/*** Dark Theme *****************************************************************************/
+.dark .tooltip .tooltiptext {
+    background-color: rgb(204, 149, 30);
+    color: #00567e;
+    font-weight: bold;
+    box-shadow:  2px 4px 10px 0px #000;
+}
+
+.dark .tooltip .tooltiptext::after {
+    border-color: transparent transparent rgb(204, 149, 30) transparent;
+}

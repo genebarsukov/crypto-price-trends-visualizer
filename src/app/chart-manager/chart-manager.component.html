@@ -1,0 +1,166 @@
+<div class="charting-area" [ngClass]="chartSettingsService.getTheme()" (mousemove)="updateRulePosition($event)">
+    <div class="chart-container-grid">
+        <div *ngFor="let row of containerRows" 
+                class="chart-container-row" 
+                [dragula]='"bag"' 
+                [dragulaModel]="row">
+            <div *ngFor="let control of row"
+                    class="chart-item"
+                    [class.undraggable]="(!chartSettingsService.getSetting('general', 'movableControls').active && (control.includes('LineSettings') || control.includes('TopControls') || control.includes('TimeSettings') || control.includes('CurrentPricePercent')))
+                                    || (!chartSettingsService.getSetting('general', 'movableCharts').active && (control.includes('PriceChartComponent') || control.includes('RSIComponent') || control.includes('MACDComponent') || control.includes('StochasticComponent') || control.includes('SpreadChartComponent')))">
+                <!-- Line Settings -->
+                <div *ngIf="control=='LineSettings'"
+                        class="control-container line-settings-container">
+                    <line-settings *ngFor="let line of lines let i = index"
+                                    [priceLine]="line"
+                                    (onRebuildSvg)="rebuildSvg($event)" 
+                                    (onColorUpdated)="colorUpdated($event)"
+                                    (onRemove)="removeLine($event)">
+                    </line-settings>
+                </div>
+                
+                <!-- Time Settings -->
+                <time-settings *ngIf="control=='TimeSettings'" 
+                                #timeSettings
+                                (onRebuildSvg)="updateAllAndRebuildSvg()">
+                </time-settings>
+                
+                <!-- Current Price Percent -->
+                <current-price-percent *ngIf="control=='CurrentPricePercent'" 
+                                        #currentPricePercentComponent 
+                                        [priceLine]="lines[0]">
+                </current-price-percent>
+
+                <!-- Price Chart -->
+                <price-chart *ngIf="control=='PriceChartComponent' && chartSettingsService.getActiveCharts().includes('PriceChart')"
+                                #priceChartComponent 
+                                [lines]="lines"
+                                [scale]="scale"
+                                [scalePercent]="scalePercent">
+                </price-chart>
+
+                <!-- RSI -->
+                <rsi *ngIf="control=='RSIComponent' && chartSettingsService.getActiveCharts().includes('RSI')" 
+                        #rsiComponent 
+                        [priceLine]="lines[0]">
+                </rsi>
+                
+                <!-- Stochastic -->
+                <stochastic *ngIf="control=='StochasticComponent' && chartSettingsService.getActiveCharts().includes('Stochastic')" 
+                            #stochasticComponent 
+                            [priceLine]="lines[0]">
+                </stochastic>
+                
+                <!-- MACD -->
+                <macd *ngIf="control=='MACDComponent'  && chartSettingsService.getActiveCharts().includes('MACD')" 
+                        #macdComponent 
+                        [priceLine]="lines[0]">
+                </macd>
+
+                <!-- Spread Chart -->
+                <spread-chart *ngIf="control=='SpreadChartComponent'  && chartSettingsService.getActiveCharts().includes('SpreadChart')" 
+                                #spreadChartComponent 
+                                [lines]="lines"
+                                [firstLineIndex]="'0'"
+                                [secondLineIndex]="'1'">
+                </spread-chart>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Controls -->
+    <div class="top-controls-container">
+        <!-- Add line -->
+        <div class="tooltip">
+            <button class="chart-control add-button" 
+                    (click)="addLine()">
+                &nbsp; 
+            </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Add another price line </span>
+        </div>
+        <div class="h-spacer-10"></div>
+
+        <!-- Scale -->
+        <div class="tooltip">
+            <button class="chart-control w3-btn icon-button scale-button" 
+                    [class.selected]="scale" 
+                    (click)="toggleScale()"> 
+                &nbsp; 
+            </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Scale multiple lines on the chart relative to one another </span>
+        </div>
+        <div class="h-spacer-10"></div>
+
+        <!-- Scale Percent -->
+        <div class="tooltip">
+            <button class="chart-control w3-btn icon-button percent-button" 
+                    [class.selected]="scalePercent" 
+                    (click)="toggleScalePercent()">
+                &nbsp;
+            </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Scale lines as a % of their first value </span>
+        </div>
+        <div class="h-spacer-10"></div>
+
+        <!-- Toggle line / candles -->
+        <div class="tooltip">
+            <button class="chart-control w3-btn icon-button" 
+                    [class.line-line]="lineType=='candle'"
+                    [class.line-candle]="lineType=='line'"
+                    (click)="toggleLineType()">
+                &nbsp;
+            </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Switch price line display between lines and candles </span>
+        </div>
+        <div class="h-spacer-10"></div>
+
+        <!-- Toggle chart ruler / crosshair -->
+        <div class="tooltip">
+            <button class="ruler-control chart-control w3-btn icon-button" 
+                    [class.ruler-line]="rulerType=='line'"
+                    [class.ruler-crosshair]="rulerType=='crosshair'"
+                    [class.selected]="rulerType=='crosshair' || rulerType==''"
+                    (click)="toggleChartRuler()"
+                    tooltip="Tooltip" placement="top" show-delay="500"> 
+                &nbsp; 
+            </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Toggle a mouse line / crosshair </span>
+        </div>
+        <div class="h-spacer-10"></div>
+
+        <!-- Toggle Algo Tester -->
+        <div class="tooltip">
+            <button class="chart-control icon-button algo-button" 
+                    [class.selected]="algoTesterIsShown"
+                    (click)="toggleAlgoTester()">
+            </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Toggle Algorithm Tester </span>
+        </div>
+        <div class="h-spacer-10"></div>
+
+    </div>
+
+    <!-- Algo Tetser -->
+    <algo-tester *ngIf="algoTesterIsShown"
+                 #algoTester 
+                 (onDismissed)="toggleAlgoTester()"
+                 (onUpdateChartSettings)="updateChartSettings($event)">
+    </algo-tester>
+
+    <!-- Rulers -->
+    <div #horizontalRuler [hidden]="horizontalRulerHidden" class="chart-ruler horizontal"> </div>
+    <div #verticalRuler [hidden]="verticalRulerHidden" class="chart-ruler vertical"> </div>
+
+    <!-- Alert Modal -->
+    <alert-modal [messageHeader]="'Data Response Error'"
+                    [messageText]="errorMessage"
+                    [messageButtonText]="'Ok'"
+                    [isShown]="errorMessage"
+                    (onModalDismissed)="hideErrorModal()">
+    </alert-modal>
+
+    <!-- Loading -->
+    <div [hidden]="!isLoading" class="loader">
+        <div class="loading-spinner"></div>
+    </div>
+</div>

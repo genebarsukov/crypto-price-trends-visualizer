@@ -1,0 +1,123 @@
+.control-container {
+    box-shadow: 1px 1px 10px 0px #DDD;
+    border-radius: 3px;
+}
+
+.svg-container {
+    position: relative;
+    text-align: center;
+}
+
+.chart-settings-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+.chart-settings-container .settings-text {
+    font-size: 10pt;
+}
+
+.chart-label {
+    display: inline-block;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+.chart-settings-container .chart-label.floating {
+    position: absolute;
+    left: 50%;
+    top: 30px;
+}
+
+.scale-buttons-container {
+    padding-right: 5px;
+}
+
+.centered-container {
+    width: 100%;
+    text-align: center;
+}
+
+.icon-group {
+    display: inline-block;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    margin-right: 10px;
+    border-radius: 5px;
+    color: #FFF;
+    text-shadow: 1px 1px 5px #999;
+}
+
+.settings-modal-button-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.settings-input {
+    width: 40px;
+    height: 25px;
+    display: inline-block;
+    padding: 2px;
+    text-align: center;
+    border: none;
+    box-shadow: inset 1px 1px 10px 0px #DDD;
+    outline: none;
+    border-radius: 2px;
+}
+
+.settings-input:focus {
+    border: 1px solid rgba(63, 171, 253, 0.5);
+}
+
+
+/*** Light Theme *****************************************************************************/
+.light .chart-label {
+    color: rgb(73, 152, 212);
+    text-shadow:  2px 1px 2px #999;
+}
+.light.control-container,
+.light .control-container {
+    box-shadow: 1px 1px 10px 0px #DDD;
+    background-color: #FFF;
+}
+.light .settings-text {
+    color: #000;
+}
+.light .settings-input {
+    color: #000;
+    background-color: #FFF;
+    box-shadow: inset 1px 1px 10px 0px #DDD;
+}
+.light .settings-input:focus {
+    border: 1px solid rgba(63, 171, 253, 0.5);
+}
+.light .settings-input:disabled {
+    color: rgb(162, 186, 201);
+    background-color: #EFEFEF;
+}
+/*** Dark Theme *****************************************************************************/
+.dark .chart-label {
+    color: rgb(204, 149, 30);
+    text-shadow:  2px 1px 2px #000;
+}
+.dark.control-container,
+.dark .control-container {
+    background-color: #263238;
+    box-shadow: 1px 1px 10px 0px #000;
+}
+.dark .settings-text {
+    color: #FFF;
+}
+.dark .settings-input {
+    color: #FFF;
+    background-color: #475f6b;
+    box-shadow: inset 1px 1px 10px 0px #263238;
+}
+.dark .settings-input:focus {
+    border: 1px solid rgba(63, 171, 253, 0.5);
+}
+.dark .settings-input:disabled {
+    color: rgb(168, 161, 117);
+    background-color: rgb(49, 48, 48);
+}

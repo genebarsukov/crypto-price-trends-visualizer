@@ -1,0 +1,49 @@
+<div class="color-control-container" [ngClass]="chartSettingsService.getTheme()">
+    <div class="color-input" (click)="togglePalette()">
+        <div class="selected-color" [style.background-color]="selectedColor"></div>
+    </div>
+    <div class="color-palette" [class.hidden]="paletteHidden" (click)="hidePalette()">
+        <div class="color-palette-column">
+            <div *ngFor="let color of colors.blues" 
+                 class="palette-color" 
+                 [style.background-color]="color"
+                 (click)="selectColor(color)">
+            </div>
+        </div>
+        <div class="color-palette-column">
+            <div *ngFor="let color of colors.greens" 
+                 class="palette-color" 
+                 [style.background-color]="color"
+                 (click)="selectColor(color)">
+            </div>
+        </div>
+        <div class="color-palette-column">
+            <div *ngFor="let color of colors.yellows" 
+                  class="palette-color" 
+                  [style.background-color]="color"
+                  (click)="selectColor(color)">
+            </div>
+        </div>
+        <div class="color-palette-column">
+            <div *ngFor="let color of colors.reds" 
+                  class="palette-color" 
+                  [style.background-color]="color"
+                  (click)="selectColor(color)">
+            </div>
+        </div>
+        <div class="color-palette-column">
+                <div *ngFor="let color of colors.magentas" 
+                      class="palette-color" 
+                      [style.background-color]="color"
+                      (click)="selectColor(color)">
+                </div>
+            </div>
+        <div class="color-palette-column">
+            <div *ngFor="let color of colors.grays" 
+                  class="palette-color" 
+                  [style.background-color]="color"
+                  (click)="selectColor(color)">
+            </div>
+        </div>
+    </div>
+</div>

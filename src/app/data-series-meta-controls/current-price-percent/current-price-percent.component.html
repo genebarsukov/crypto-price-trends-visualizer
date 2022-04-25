@@ -1,0 +1,20 @@
+<div class="control-container current-price-percent-control-container" [ngClass]="chartSettingsService.getTheme()">
+    <div class="cpp-inner-container">
+        <div class="cpp-past-price">
+            {{ pastPrice }}
+        </div>
+        &#8667;
+        <div class="cpp-price">
+            {{ price }}
+        </div>
+        <div class="h-spacer-5"></div>
+        <div class="cpp-percent-container">
+            <div class="cpp-percent-arrow" 
+                 [ngClass]="{'arrow-up': percentArrow === 'up', 'arrow-down': percentArrow === 'down'}">
+            </div>
+            <div class="cpp-percent" [ngClass]="{'positive': percentArrow === 'up', 'negative': percentArrow === 'down'}">
+                {{ percent }}%
+            </div>
+        </div>
+    </div>
+</div>

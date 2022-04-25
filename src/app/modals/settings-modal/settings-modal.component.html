@@ -1,0 +1,74 @@
+<div class="modal-overlay-container settings-modal-control-container" [ngClass]="chartSettingsService.getTheme()" [class.modal-hidden]="!isShown" >
+    <div class="modal-body-container settings-inner-container">
+        <button class="chart-control remove-button close-settings-button" (click)="dismissModal()"> &#x2716; </button>
+        <div class="settings-modal-message-container">
+            <div class="message-header">
+                {{ messageHeader }}
+            </div>
+            
+            <div class="setting-heading"> 
+                Theme
+            </div>
+            <div class="settings-group-horizontal">
+
+                <label class="radio-container"> Light
+                    <input type="radio" 
+                           name="radio" 
+                           [checked]="chartSettingsService.getTheme()=='light'"
+                           [value]='light' 
+                           (click)="changeTheme('light')">
+                    <span class="radio-checkmark"></span>
+                </label>
+
+                <label class="radio-container"> Dark
+                    <input type="radio"
+                           name="radio"
+                           [checked]="chartSettingsService.getTheme()=='dark'"
+                           [value]='dark'
+                           (click)="changeTheme('dark')">
+                    <span class="radio-checkmark"></span>
+                </label>
+
+                <label class="radio-container"> None
+                    <input type="radio"
+                    name="radio"
+                    [checked]="chartSettingsService.getTheme()==''"
+                    [value]=''
+                    (click)="changeTheme('')">
+                    <span class="radio-checkmark"></span>
+                </label>
+            </div>
+
+            <div class="setting-heading"> 
+                General
+            </div>
+            <div class="settings-group">
+                <div *ngFor="let setting of generalSettings | objectProperties" class="indicator-setting">
+                    <label class="container" 
+                            [class.checked]="setting.value.active"
+                            (click)="toggleSetting(setting.value)"> {{ setting.value.name }}
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-heading"> 
+                Charts
+            </div>
+            <div class="settings-group">
+                <div *ngFor="let setting of chartSettings | objectProperties" class="indicator-setting">
+                    <label class="container" 
+                           [class.checked]="setting.value.active"
+                           (click)="toggleChartSetting(setting.value)"> {{ setting.value.name }}
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="settings-modal-button-container">
+            <button class="chart-control modal-action-buton settings-ok-button" (click)="dismissModal()">
+                {{ messageButtonText }}
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+.loader {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #FFF;
+    opacity: 0.7;
+    animation: fadein 1s;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    background: url('app/images/bitcoin.png') center no-repeat;
+    width: 128px;
+    height: 128px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.square {
+    border-radius: 0px;
+}
+
+.bg-white {
+    background-color: #FFF;
+}
+
+.bottom-border {
+    border-bottom: 1px solid #DDD;
+}
+
+
+@-webkit-keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 0.75; }
+}
+
+@keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 0.75; }
+}
+
+.warning-message {
+    display: inline-block;
+    position: fixed;
+    background-color: crimson;
+    box-shadow: inset -7px 7px 15px 0px rgb(114, 1, 1);
+    opacity: 0.75;
+    color: #FFF;
+    top: 10px;
+    left: 20px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 3px;
+    -webkit-animation: fadeinout 2s linear forwards;
+    animation: fadeinout 2s linear forwards;
+}
+.warning-message.small {
+    -webkit-animation: fadeinout 1s linear forwards;
+    animation: fadeinout 1s linear forwards;
+}
+
+.warning-message.medium {
+    -webkit-animation: fadeinout 2s linear forwards;
+    animation: fadeinout 2s linear forwards;
+}
+.warning-message.long {
+    -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+}
+.warning-message.xl {
+    -webkit-animation: fadeinout 10s linear forwards;
+    animation: fadeinout 10s linear forwards;
+}
+
+.info-message {
+    display: inline-block;
+    position: fixed;
+    background-color: lime;
+    box-shadow: inset -7px 7px 15px 0px rgb(1, 114, 1);
+    opacity: 0.75;
+    color: #000;
+    top: 10px;
+    left: 20px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 3px;
+    -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+}
+.info-message.small {
+    -webkit-animation: fadeinout 2s linear forwards;
+    animation: fadeinout 2s linear forwards;
+}
+
+.info-message.medium {
+    -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+}
+.info-message.long {
+    -webkit-animation: fadeinout 8s linear forwards;
+    animation: fadeinout 8s linear forwards;
+}
+.info-message.xl {
+    -webkit-animation: fadeinout 20s linear forwards;
+    animation: fadeinout 20s linear forwards;
+}
+.highlighted-green {
+    background-color: rgba(0, 255, 0, 0.4);
+}
+.highlighted-opaque-green {
+    background-color: rgba(0, 255, 0, 0.2);
+}
+
+/*** Light Theme *****************************************************************************/
+.light .loader {
+    background-color: #FFF;
+}
+.light .loading-spinner {
+    background: url('app/images/bitcoin.png') center no-repeat;
+}
+.light .highlighted {
+    background-color: rgba(32, 148, 243, 0.5);
+}
+
+/*** Dark Theme *****************************************************************************/
+.dark .loader {
+    background-color: rgba(21, 33, 39, 0.5);
+}
+.dark .loading-spinner {
+    background: url('app/images/bitcoin-gold.png') center no-repeat;
+}
+.dark .highlighted {
+    background-color: rgba(204, 149, 30, 0.5);
+}

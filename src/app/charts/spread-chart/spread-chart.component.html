@@ -1,0 +1,54 @@
+<div class="control-container padded-top-5 spread-chart-control-container" [ngClass]="chartSettingsService.getTheme()">
+    <div class="chart-settings-container">
+
+        <div class="chart-label">
+            <div *ngIf="lines && lines.length > 1" class="icon-group" [style.background-color]="lines[firstLineIndex].color">
+                <img class="from-symbol" [src]="iconSettingsService.getIconUrlBySymbol(lines[firstLineIndex].fromSymbol, 'small')">
+                vs
+                <img class="to-symbol" [src]="iconSettingsService.getIconUrlBySymbol(lines[firstLineIndex].toSymbol, 'small')">
+            </div>
+            <div *ngIf="lines && lines.length > 1" class="icon-group" [style.background-color]="lines[1].color">
+                <img class="from-symbol" [src]="iconSettingsService.getIconUrlBySymbol(lines[secondLineIndex].fromSymbol, 'small')">
+                vs
+                <img class="to-symbol" [src]="iconSettingsService.getIconUrlBySymbol(lines[secondLineIndex].toSymbol, 'small')">
+            </div>
+            Spread
+        </div>
+
+        <div class="settings-container">
+            <button class="chart-control icon-button" 
+                    [class.selected]="scaleType==='Percent'" 
+                    (click)="toggleScaleType()"
+                    [disabled]="lines.length < 2">
+                {{ scaleType }} Difference
+            </button>
+        </div>
+
+        <div class="scale-buttons-container">
+            <button class="chart-control on-chart-button bg-white"
+                    [disabled]="svgWidth <= SVG_WIDTH_MIN"
+                    (click)="sizeChartDown()">
+                - 
+            </button>
+            <button class="chart-control on-chart-button bg-white left-100" 
+                    [disabled]="svgWidth >= SVG_WIDTH_MAX"
+                    (click)="sizeChartUp()">
+                +
+            </button>
+            <div class="h-spacer-10"></div>
+            <button class="chart-control remove-button" 
+                    (click)="closeChart('SpreadChart')">
+                &#x2716;
+            </button>
+        </div>
+    </div>
+    <div class="svg-container spread-chart-container">
+        <svg class="spread-chart" 
+            [attr.width]="svgWidth" 
+            [attr.height]="svgHeight">
+        </svg>
+    </div>
+    <div *ngIf="lines.length < 2" class="spread-chart-warning">
+        {{ warning }}
+    </div>
+</div>

@@ -1,0 +1,72 @@
+.color-control-container:hover {
+    box-shadow:  1px 1px 10px 0px #999;
+}
+.color-control-container {
+    position: relative;
+    display: inline-block;
+}
+
+.color-input {
+    display: inline-block;
+    width: 30px;
+    height: 28px;
+    padding: 1px;
+}
+
+.color-input:hover {
+    cursor: pointer;
+}
+
+.selected-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.color-palette {
+    z-index: 500;
+    padding: 5px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    top: 2rem;
+    background-color: #FFF;
+    box-shadow:  1px 1px 10px 0px #999;
+}
+
+.color-palette-column {
+    display: inline-block;
+}
+
+.palette-color {
+    width: 20px;
+    height: 20px;
+    margin: 1px;
+}
+.palette-color:hover {
+    opacity: 0.75
+}
+.hidden {
+    display: none;
+}
+
+
+/*** Light Theme *****************************************************************************/
+.light.color-control-container:hover {
+    box-shadow:  1px 1px 10px 0px #999;
+}
+.light .color-palette {
+    background-color: #FFF;
+    box-shadow:  1px 1px 10px 0px #999;
+}
+
+/*** Dark Theme *****************************************************************************/
+.dark.color-control-container:hover {
+    box-shadow:  1px 1px 10px 0px #000;
+}
+.dark .color-palette {
+    background-color: #263238;
+    box-shadow:  1px 1px 10px 0px #000;
+}

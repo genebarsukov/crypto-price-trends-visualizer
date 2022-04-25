@@ -1,0 +1,21 @@
+.spread-chart-control-container {
+    position: relative;
+}
+
+.spread-chart-warning {
+    position: absolute;
+    background-color: crimson;
+    box-shadow: inset -7px 7px 15px 0px rgb(114, 1, 1);
+    opacity: 0.75;
+    color: #FFF;
+    top: 40%;
+    left: 0;
+    margin: 0px 100px 0px 100px;
+    padding: 10px 20px 10px 20px;
+    border-radius: 3px;
+
+}
+
+.from-to-container {
+    display: inline-block;
+}

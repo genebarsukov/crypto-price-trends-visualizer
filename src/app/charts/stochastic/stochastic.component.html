@@ -1,0 +1,53 @@
+<div class="control-container padded-top-5 stochastic-control-container" [ngClass]="chartSettingsService.getTheme()">
+        <div class="chart-settings-container stochastic-settings-container">
+
+            <div class="chart-label">
+                <div class="icon-group" [style.background-color]="priceLine.color">
+                    <img class="from-symbol" [src]="iconSettingsService.getIconUrlBySymbol(priceLine.fromSymbol, 'small')">
+                    vs
+                    <img class="to-symbol" [src]="iconSettingsService.getIconUrlBySymbol(priceLine.toSymbol, 'small')">
+                </div>
+                Stochastic
+            </div>
+
+            <div class="settings-container">
+                <span class="settings-text"> Period </span> 
+                <input class="settings-input stochastic-settings-input" type="text" [(ngModel)]="period" (keydown.enter)="updateStochastic()"/>
+                <div class="h-spacer-5"></div>
+                <span class="settings-text"> Overbought </span> 
+                <input class="settings-input stochastic-settings-input" type="text" [(ngModel)]="overbought" (ngModelChange)="updateOverBought()" (keydown.enter)="updateStochastic()"/>
+                <div class="h-spacer-5"></div>
+                <span class="settings-text"> Oversold </span> 
+                <input class="settings-input stochastic-settings-input" type="text" [(ngModel)]="oversold" (ngModelChange)="updateOverSold()" (keydown.enter)="updateStochastic()"/>
+                <div class="h-spacer-5"></div>
+                <span class="settings-text"> Smoothing </span> 
+                <input class="settings-input stochastic-settings-input" type="text" [(ngModel)]="SMAPeriod" (keydown.enter)="updateStochastic()"/>
+                <div class="h-spacer-5"></div>
+                <button class="chart-control update-button" (click)="updateStochastic()"> Update </button>
+            </div>
+
+            <div class="scale-buttons-container">
+                <button class="chart-control on-chart-button bg-white"
+                        [disabled]="svgWidth <= SVG_WIDTH_MIN"
+                        (click)="sizeChartDown()">
+                    - 
+                </button>
+                <button class="chart-control on-chart-button bg-white left-100" 
+                        [disabled]="svgWidth >= SVG_WIDTH_MAX"
+                        (click)="sizeChartUp()">
+                    +
+                </button>
+                <div class="h-spacer-10"></div>
+                <button class="chart-control remove-button" 
+                        (click)="closeChart('Stochastic')">
+                    &#x2716;
+                </button>
+            </div>
+        </div>
+        <div class="svg-container stochastic-chart-container">
+            <svg class="stochastic-chart"
+                 [attr.width]="svgWidth" 
+                 [attr.height]="svgHeight">
+            </svg>
+        </div>
+    </div>

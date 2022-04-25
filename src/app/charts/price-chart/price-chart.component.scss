@@ -1,0 +1,48 @@
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis-title {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.5px;
+}
+
+.axis text {
+    font-family: Arial;
+    font-size: 13px;
+    color: #333333;
+    text-anchor: end;
+    }
+
+.label {
+    font-family: Arial;
+    font-size:13px;
+    color: #333333;
+    text-anchor: middle;
+    }
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0;
+}
+.grid path {
+      stroke-width: 0;
+}
+
+.iterations-input {
+    cursor: default;
+}

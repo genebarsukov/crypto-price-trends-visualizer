@@ -1,0 +1,84 @@
+<div class="modal-overlay-container help-modal-control-container" [ngClass]="chartSettingsService.getTheme()" [class.modal-hidden]="!isShown">
+    <div class="modal-body-container help-inner-container">
+        <button class="chart-control remove-button close-settings-button" (click)="dismissModal()"> &#x2716; </button>
+        <div class="help-modal-message-container">
+            <div class="message-header">
+                {{ messageHeader }}
+            </div>
+            <div class="message-body">
+                <div class="help-heading">
+                    What is it?
+                </div>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    The purpose of this app is to help visualize and compare crypotcurrency price data from different exchanges
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    This is still a work in progress in its early stages
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    You can hover over most of the buttons to learn their functionality with their help bubbles. 
+                    After you are comfortable with all the buttons, you can turn the help bubbles off in the settings menu all the way to the right. 
+                </p>
+                <div class="help-heading">
+                    Initial Configuration
+                </div>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    Use the Gear icon top right to change app behavior like turning off the help tooltips and making charts undraggable.
+                    You can also use the settings to set which charts you want to display by default.
+                    Once you close the settings window, your settings are saved and reloaded when you refresh the browser. Close the browser to reset your preferences.
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    All individual components such as charts, sontrols and other data components can be dragged and repositioned anywhere on the page.
+                    You can turn this functionality on or off in the settings menu. The draggability interferes with certain actions sometimes
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    Charts can also be resized
+                </p>
+                <div class="help-heading"> 
+                    Functionality
+                </div>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    You have the main price chart front and center. You can switch between different coins and exchanges as well as time units and periods to 
+                    your hearts content
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    You can use the controls in the top tight to manipulate the different data sets displayed on the chart
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    Add multiple price lines to the main price chart to compare them.
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    When adding multiple prices, it is important to note that most of the price indicators will still only reflect your first data set.
+                    The Spread indicator will show the spread beween the first and second line and needs to have at least two price lines on the chart to be active.
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    You can easily overlay and compare two prices on the same graph. Change their color so you know which one is which.
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    When you want to view two or more coin prices whose prices are too far apart, like Ripple and Bitcoin for example, you can scale them in
+                    relation to one another and as a % of their initial value using the controls on the right.
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    Use the magenta line ruler on the right to help you analyze prices.
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    The Algo Tester tool that you bring up with the biohazard button is still in very early experimental stages.
+                </p>
+                <div class="help-heading"> 
+                    Extra Stuff
+                </div>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    Have fun! I hope this helps you at least little.
+                </p>
+                <p><span class="bullet" [innerHTML]="bullet"></span>
+                    If you have any comments, suggestions, or questions, please drop me a line at codewrencher@gmail.com.
+                </p>
+            </div>
+        </div>
+        <div class="help-modal-button-container">
+            <button class="chart-control modal-action-buton" (click)="dismissModal()">
+                {{ messageButtonText }}
+            </button>
+        </div>
+    </div>
+</div>

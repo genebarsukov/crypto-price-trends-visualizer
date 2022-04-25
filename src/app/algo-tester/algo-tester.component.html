@@ -1,0 +1,190 @@
+<div class="control-container algo-tester-control-container" [ngClass]="chartSettingsService.getTheme()">
+    <div class="message-header"> Algo Tester </div>
+    <div class="algo-tester-inner-container">
+        <button class="chart-control remove-button close-allgo-tester-button" (click)="closeAlgoTester()"> &#x2716; </button>
+        <div class="algo-body">
+            <div class="algo-heading"> Test Setup </div>
+            <div class="algo-top-controls">
+                <div class="algo-setting-container">
+                    <div class="chart-label">
+                        Indicator
+                    </div>
+                    <div class="tooltip">
+                        <select class="select-control select-indicator" 
+                                [(ngModel)]="selectedIndicator" 
+                                (ngModelChange)="setSelectedChartService(selectedIndicator);"
+                                [disabled]="!indicators.length">
+                            <option *ngFor="let indicator of indicators"
+                                    class="option-indicator" 
+                                    value= {{indicator}}>
+                                {{ indicator }}
+                            </option>
+                        </select>
+                        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Select Indicator to run the algorithm on </span>
+                    </div>
+                </div>
+                <div class="algo-setting-container">
+                    <div class="chart-label">
+                        Trade Fee
+                    </div>
+                    <div class="tooltip">
+                        <select class="select-control select-trade-fee" 
+                                [(ngModel)]="tradeFee" 
+                                (ngModelChange)="setTradeFee(tradeFee);"
+                                [disabled]="!indicators.length">
+                            <option *ngFor="let fee of tradeFees"
+                                    class="option-indicator" 
+                                    value= {{fee}}>
+                                {{ fee }}
+                            </option>
+                        </select>
+                        <div class="chart-label algo-setting-label">
+                            %
+                        </div>
+                        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Select a trade fee that the exchnange charges as a % of total trade cost </span>
+                    </div>
+                </div>
+                <div class="algo-setting-container">
+                    <div class="chart-label">
+                        Coins Per Trade
+                    </div>
+                    <div class="tooltip">
+                        <input class="settings-input algo-settings-input"
+                               type="text" 
+                               [(ngModel)]="coinsPerTrade" 
+                               (ngModelChange)="setCoinsPerTrade();"
+                               (keydown.enter)="updateComponentAndOptimize()"
+                               [disabled]="!indicators.length"/>
+                        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Select how many coins you want to trade with </span>
+
+                    </div>
+                </div>
+                <div class="algo-setting-container">
+                    <div class="chart-label">
+                        Initial Trade Cost
+                    </div>
+                    <div class="tooltip">
+                        <input class="settings-input algo-settings-input"
+                               type="text" 
+                               [(ngModel)]="costPerTrade" 
+                               (ngModelChange)="setCostPerTrade();"
+                               (keydown.enter)="updateComponentAndOptimize()"
+                               [disabled]="!indicators.length">
+                        <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Select how much cash you want to spend per trade </span>
+                    </div>
+                </div>
+                <div class="tooltip">
+                    <button class="chart-control optimize-button"
+                            (click)="updateComponentAndOptimize()"
+                            [disabled]="!indicators.length">
+                                Update
+                    </button>
+                    <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext">
+                        Ree-run algo with new parameters
+                    </span>
+                </div>
+            </div>
+            <div class="algo-heading"> Result Summary </div>
+            <div class="algo-summary-stat">
+                <div class="chart-label"> Chart Profit: </div>
+                <div class="algo-profit"
+                    [ngClass]="{ 'green-profit': chartProfit > 0, 'red-profit': chartProfit < 0 }">
+                    {{ chartProfit }}
+                </div>
+            </div>
+            <div class="algo-summary-stat">
+                <div class="chart-label"> Algo Profit: </div>
+                <div class="algo-profit"
+                    [ngClass]="{ 'green-profit': algoProfit > 0, 'red-profit': algoProfit < 0 }">
+                    {{ algoProfit }}
+                </div>
+            </div>
+            <div class="algo-summary-stat bottom-border">
+                <div class="chart-label"> Algo Profit Boost: </div>
+                <div>
+                    <div class="algo-profit"
+                        [ngClass]="{ 'green-profit': profitDiff > 0, 'red-profit': profitDiff < 0 }">
+                        {{ profitDiff }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="algo-summary-stat">
+            <div class="chart-label"> Algo Supremacy: </div>
+            <div>
+                <div class="algo-profit"
+                    [ngClass]="{ 'green-profit': profitDiff > 0, 'red-profit': profitDiff < 0 }"
+                    [innerHTML]="profitDiffPercent">
+                </div>
+                <div class="chart-label algo-setting-label">
+                    %
+                </div>
+            </div>
+        </div>
+        <div class="tooltip">
+            <button class="chart-control optimize-button"
+                    (click)="optimizeAlgo()"
+                    [disabled]="!indicators.length">
+                        Optimize
+            </button>
+            <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext">
+                Run through multiple parameters for the selected indicator to find the set of parameters giving the biggest profit
+            </span>
+        </div>
+        <div *ngIf="optimizationResults.length" class="algo-heading">
+            Optimization Results
+            <div class="h-spacer-20"></div>
+            <button class="chart-control on-chart-button bg-white left-100" (click)="toggleOptimization()">
+                    {{ optimizationExpanded ? '-' : '+' }}
+            </button>
+        </div>
+        <div *ngIf="optimizationExpanded && optimizationResults.length" class="algo-result optimization bottom-border">
+            <div *ngFor="let optimizationProperty of optimizationResults[0] | objectProperties"
+                 [class.hidden]="excludedHeadings.includes(optimizationProperty.property)"
+                 class="result-cell chart-label text-sm sortable-header"
+                 (click)="sortOptimizations(optimizationProperty.property)">
+                {{ optimizationProperty.property }}
+            </div>
+        </div>
+        <div *ngIf="optimizationExpanded">
+            <div *ngFor="let optimizationResult of optimizationResults; let i = index"
+                class="algo-result optimization"
+                [ngClass]="{ 'highlighted-opaque-green': optimizationResult.Profit == maxOptimizedProfit && optimizationResult?.index != optimizedSettingToRender?.index,
+                             'highlighted-green': optimizationResult?.index == optimizedSettingToRender?.index }"
+                (click)=renderSelectedSetting(optimizationResult)>
+                <div *ngFor="let optimizationSetting of optimizationResult | objectProperties" 
+                    class="result-cell"
+                    [ngClass]="{ 'green-profit': optimizationSetting.property=='Profit' && optimizationSetting.value > 0,
+                                 'red-profit': optimizationSetting.property=='Profit' && optimizationSetting.value < 0,
+                                 'hidden': excludedHeadings.includes(optimizationSetting.property) }">
+                    {{ optimizationSetting.value }} 
+                </div>
+            </div>
+        </div>
+        <div class="algo-results"> 
+            <div class="algo-results algo-heading"> Results: </div>
+            <div class="algo-result bottom-border">
+                <div class="result-cell chart-label"> Buy </div>
+                <div class="result-cell chart-label"> Sell </div>
+                <div class="result-cell chart-label"> Profit </div>
+            </div>
+            <div *ngFor="let testResult of testResults" class="algo-result">
+                <div class="result-cell"> {{ testResult.buy }} </div>
+                <div class="result-cell"> {{ testResult.sell }} </div>
+                <div class="result-cell" [ngClass]="{'green-profit': testResult.profit > 0, 'red-profit': testResult.profit < 0 }"> {{ testResult.profit }} </div>
+            </div>
+
+
+            <div class="algo-result bottom-border"></div>
+            <div class="algo-result">
+                <div class="result-cell">
+                    <div class="chart-label"> Overall: </div>
+                </div>
+                <div class="result-cell algo-profit" [ngClass]="{'green-profit': algoProfit > 0, 'red-profit': algoProfit < 0 }"> {{ algoProfit }} </div>
+            </div>
+        </div>
+    </div>
+    <div [hidden]="!isLoading" class="loader">
+        <div class="loading-spinner"></div>
+    </div>
+</div>

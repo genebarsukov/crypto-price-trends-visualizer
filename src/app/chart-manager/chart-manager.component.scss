@@ -1,0 +1,182 @@
+.charting-area {
+    position: relative;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 50px;
+}
+
+.dark.charting-area {
+    background-color: #152127;
+    padding-top: 1.5rem;
+}
+
+.light.charting-area {
+    background-color: #FFF;
+}
+
+algo-tester {
+    position: fixed;
+    top: 50px;
+    left: 10px;
+}
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis-title {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.5px;
+}
+
+.axis text {
+    font-family: Arial;
+    font-size: 13px;
+    color: #333333;
+    text-anchor: end;
+    }
+
+.label {
+    font-family: Arial;
+    font-size:13px;
+    color: #333333;
+    text-anchor: middle;
+    }
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0;
+}
+.grid path {
+      stroke-width: 0;
+}
+
+.line-settings-container {
+    text-align: center;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    padding: 2px 10px 2px 2px;
+}
+
+.time-settings-container {
+    text-align: center;
+}
+
+.top-controls-container {
+    position: fixed;
+    top: 0;
+    right: 120px;
+    justify-content: flex-end;
+    display: flex;
+    padding: 10px;
+    
+}
+
+.ruler-control {
+    min-width: 45px;
+}
+ 
+.chart-ruler {
+    z-index: 0;
+    position: absolute;
+    border: 1px dashed fuchsia;
+}
+
+.chart-ruler.horizontal {
+    top: 50%;
+    left: 0px;
+    height: 0px;
+    width: 100%;
+}
+
+.chart-ruler.vertical {
+    top: 0px;
+    left: 50%;
+    height: 100%;
+    width: 0px;
+}
+
+.line-line {
+    background: url('app/images/line_30.png') center no-repeat;
+}
+
+.line-candle {
+    background: url('app/images/candles_30.png') center no-repeat;
+}
+
+.ruler-line {
+    background: url('app/images/ruler_line_30.png') center no-repeat;
+}
+
+.ruler-crosshair {
+    background: url('app/images/ruler_crosshair_30.png') center no-repeat;
+}
+
+.scale-button {
+    background: url('app/images/scale_one_arrow_30.png') center no-repeat;
+}
+
+.percent-button {
+    background: url('app/images/percent_30.png') center no-repeat;
+}
+
+.algo-button {
+    min-width: 38px;
+    min-height: 38px;
+    font-size: 18pt;
+    padding: 0px;
+}
+.algo-button:after {
+    content: '\2623';
+    color: limegreen;
+}
+
+.chart-container-grid {
+    width: 100%;
+    height: 100%;
+    border: 0px solid black;
+}
+
+.chart-container-row {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 2px 0.5rem 2px 0.5rem;
+    margin: 0px;
+    border: 0px dotted black;
+}
+
+.chart-item {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.gu-mirror {
+    background-color: rgb(164, 188, 207);
+    border: 1px solid rgb(101, 159, 206);
+    box-shadow:  4px 7px 15px 0px rgb(145, 180, 206);
+}
+
+.target-drop-container {
+    background-color: rgb(197, 218, 198);
+    border: 1px solid rgb(145, 214, 154);
+    box-shadow: inset -7px 7px 15px 0px rgb(171, 204, 174);
+}

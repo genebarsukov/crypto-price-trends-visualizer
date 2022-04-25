@@ -1,0 +1,43 @@
+.current-price-percent-control-container {
+    padding: 5px 20px 5px 20px;
+}
+.cpp-inner-container {
+    display: flex;
+}
+.cpp-price,
+.cpp-past-price {
+    color: rgb(73, 152, 212);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.cpp-price {
+    font-weight: bold;
+}
+
+.cpp-percent-container {
+    display: flex;
+}
+
+.cpp-percent-arrow {
+    font-weight: bold;
+}
+.cpp-percent-arrow.arrow-up:after {
+    content: '\21E7';
+    color: limegreen;
+}
+.cpp-percent-arrow.arrow-down:after {
+    content: '\21E9';
+    color: red;
+}
+
+.cpp-percent {
+    padding-left: 2px;
+    font-weight: bold;
+}
+.cpp-percent.positive {
+    color: limegreen;
+}
+.cpp-percent.negative {
+    color: red;
+}

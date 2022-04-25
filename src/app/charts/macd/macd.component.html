@@ -1,0 +1,50 @@
+<div class="control-container padded-top-5 macd-control-container" [ngClass]="chartSettingsService.getTheme()">
+    <div class="chart-settings-container macd-settings-container">
+        
+        <div class="chart-label">
+            <div class="icon-group" [style.background-color]="priceLine.color">
+                <img class="from-symbol" [src]="iconSettingsService.getIconUrlBySymbol(priceLine.fromSymbol, 'small')">
+                vs
+                <img class="to-symbol" [src]="iconSettingsService.getIconUrlBySymbol(priceLine.toSymbol, 'small')">
+            </div>
+            MACD
+        </div>
+
+        <div class="settings-container">
+            <span class="settings-text"> Small Pariod </span> 
+            <input class="settings-input macd-settings-input" type="text" [(ngModel)]="smallPeriod" (keydown.enter)="updateMACD()"/>
+            <div class="h-spacer-5"></div>
+            <span class="settings-text"> Large Period </span> 
+            <input class="settings-input macd-settings-input" type="text" [(ngModel)]="largePeriod" (keydown.enter)="updateMACD()"/>
+            <div class="h-spacer-5"></div>
+            <span class="settings-text"> Signal Period </span> 
+            <input class="settings-input stochastic-settings-input" type="text" [(ngModel)]="signalPeriod" (keydown.enter)="updateMACD()"/>
+            <div class="h-spacer-5"></div>
+            <button class="chart-control update-button" (click)="updateMACD()"> Update </button>
+        </div>
+        
+        <div class="scale-buttons-container">
+            <button class="chart-control on-chart-button bg-white"
+                    [disabled]="svgWidth <= SVG_WIDTH_MIN"
+                    (click)="sizeChartDown()">
+                - 
+            </button>
+            <button class="chart-control on-chart-button bg-white left-100" 
+                [disabled]="svgWidth >= SVG_WIDTH_MAX"
+                (click)="sizeChartUp()">
+                +
+            </button>
+            <div class="h-spacer-10"></div>
+            <button class="chart-control remove-button" 
+                    (click)="closeChart('MACD')">
+                &#x2716;
+            </button>
+        </div>
+    </div>
+    <div class="svg-container macd-chart-container">
+        <svg class="macd-chart"
+                [attr.width]="svgWidth" 
+                [attr.height]="svgHeight">
+        </svg>
+    </div>
+</div>

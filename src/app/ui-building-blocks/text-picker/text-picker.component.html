@@ -1,0 +1,24 @@
+<div class="text-picker-control-container" [ngClass]="chartSettingsService.getTheme()">
+    <div class="text-picker-input chart-control"
+         [ngClass]="customInputClass" 
+         (click)="toggleList()">
+        <div *ngIf="selectedItem" class="selected-item" >
+            <img *ngIf="selectedItem.icon" [src]="iconSettingsService.getIconUrlBySymbol(selectedItem.icon, iconSize)" class="item-icon">
+            <div *ngIf="selectedItem.icon && selectedItem.name" class="h-spacer-5"></div>
+            {{ selectedItem.name }}
+        </div>
+    </div>
+    <div class="item-list" 
+         [ngClass]="customListClass"
+         [class.hidden]="listHidden">
+        <div *ngFor="let item of items" 
+                class="list-item"
+                [ngClass]="customItemClass"
+                (click)="selectItem(item)"
+                [class.disabled]="item.disabled">
+            <img *ngIf="item.icon" [src]="iconSettingsService.getIconUrlBySymbol(item.icon, iconSize)" class="item-icon">
+            <div *ngIf="item.icon && item.name" class="h-spacer-5"></div>
+            {{ item.name }}
+        </div>
+    </div>
+</div>

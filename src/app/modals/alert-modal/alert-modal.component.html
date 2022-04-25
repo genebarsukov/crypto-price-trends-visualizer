@@ -1,0 +1,17 @@
+<div class="modal-overlay-container alert-modal-control-container" [ngClass]="chartSettingsService.getTheme()" [class.modal-hidden]="!isShown">
+    <div class="modal-body-container alert-inner-container">
+        <div class="alert-modal-message-container">
+            <div class="message-header">
+                {{ messageHeader }}
+            </div>
+            <div class="message-body">
+                {{ messageText }}
+            </div>
+        </div>
+        <div class="alert-modal-button-container">
+            <button class="chart-control modal-action-buton" (click)="dismissModal()">
+                {{ messageButtonText }}
+            </button>
+        </div>
+    </div>
+</div>
