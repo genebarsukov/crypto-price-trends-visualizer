@@ -6,9 +6,9 @@ import { IconSettingsService } from '../../services/settings/icon-settings.servi
 
 @Component({
     selector: 'app-line-settings',
-    templateUrl: 'app/components/line-settings/line-settings.component.html',
+    templateUrl: './line-settings.component.html',
     styleUrls: [
-        'app/components/line-settings/line-settings.component.scss'
+        './line-settings.component.scss'
     ]
 })
 export class LineSettingsComponent implements OnInit {

@@ -27,6 +27,7 @@ import { MessageService } from './services/message.service';
 import { ChartManagerComponent } from './chart-manager/chart-manager.component';
 import { ObjectPropertiesPipe } from './pipes/object-properties.pipe';
 import { ExcludePipe } from './pipes/exclude.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ExcludePipe } from './pipes/exclude.pipe';
     ExcludePipe,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     DragulaModule,
     AppRoutingModule,

@@ -4,7 +4,6 @@ import { D3ChartService } from './d3-chart.service';
 
 import * as d3 from 'd3';
 import * as d3Shape from 'd3-shape';
-import * as d3Scale from 'd3-scale';
 
 
 /**
@@ -13,15 +12,15 @@ import * as d3Scale from 'd3-scale';
  */
 @Injectable()
 export class D3CurveShapeService extends D3ChartService {
-    private minLine: d3Shape.Line<[number, number]>;
-    private maxLine: d3Shape.Line<[number, number]>;
+    private minLine!: d3Shape.Line<[number, number]>;
+    private maxLine!: d3Shape.Line<[number, number]>;
 
     private smallPeriod: number = 12;
     private largePeriod: number = 26;
     private signalPeriod: number = 5;
 
-    private mins: ChartData[];
-    private maxes: ChartData[];
+    private mins!: ChartData[];
+    private maxes!: ChartData[];
     public chartBuilt: boolean = false;
 
 

@@ -11,7 +11,7 @@ import * as d3Array from 'd3-array';
 
 @Injectable()
 export class D3PriceChartService extends D3ChartService {
-    private line: d3Shape.Line<[number, number]>;
+    private line!: d3Shape.Line<[number, number]>;
     private lines: PriceLine[] = [];
     private lineType: string = 'line';
 
@@ -41,7 +41,7 @@ export class D3PriceChartService extends D3ChartService {
         }
     }
 
-    public updateColor(priceLine: PriceLine) {
+    public override updateColor(priceLine: PriceLine) {
         if (priceLine.data) {
             this.svg.selectAll('.line-' + priceLine.index.toString()).remove();
             this.drawLine(priceLine);

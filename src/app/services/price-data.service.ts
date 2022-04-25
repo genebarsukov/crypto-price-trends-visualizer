@@ -1,11 +1,12 @@
 import 'rxjs/add/operator/map';
 import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { PriceData } from '../models/price-data.model';
 import { ChartData } from '../models/chart-data.model';
 import { PriceLine } from '../models/price-line.model';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()
 export class PriceDataService {
@@ -90,8 +91,8 @@ export class PriceDataService {
     }
 
     private getHistoricalData(priceLine: PriceLine) {
-        let fromSymbol = priceLine.fromSymbol;
-        let toSymbol = priceLine.toSymbol;
+        let fromSymbol = '';//priceLine.fromSymbol;
+        let toSymbol = '';///priceLine.toSymbol;
 
         if ((priceLine.exchange == 'Binance' || priceLine.exchange == 'Cryptopia') && priceLine.toSymbol == 'USD') {
             toSymbol = 'USDT';
@@ -103,14 +104,14 @@ export class PriceDataService {
         this.apiService.getHistoricalData(fromSymbol, toSymbol, priceLine.exchange)
             .subscribe(
                 response => {
-                    if (response && response.length) {
-                        priceLine.data = this.formatResponseData(response);
+                    if (response) {
+                        priceLine.data = this.formatResponseData(response as PriceData[]);
                         this.notifySubs(priceLine);
                     } else {
-                        this.notifySubs(null);
+                        this.notifySubs(priceLine);
                     }
                 },
-                error => {
+                (error: any) => {
                     console.log('Error Getting Data');
                 }
             )
@@ -134,22 +135,22 @@ export class PriceDataService {
         this.apiService.getHistoricalData('BTC', toSymbol, priceLine.exchange)
             .subscribe(
                 response => {
-                    if (response && response.length) {
+                    if (response) {
                         // Get Bitcoin price in USD
                         this.bitcoinPrices[priceLine.exchange] = response;
                         // Get target coin price in BTC and convert it to USD when the response comes back
                         this.apiService.getHistoricalData(fromSymbol, 'BTC', priceLine.exchange)
                             .subscribe(
                                 response => {
-                                    if (response && response.length) {
-                                        let convertedData = this.convertData(response, priceLine.exchange);
-                                        priceLine.data = this.formatResponseData(response);
+                                    if (response) {
+                                        let convertedData = this.convertData(response as any[], priceLine.exchange);
+                                        priceLine.data = this.formatResponseData(response as PriceData[]);
                                         this.notifySubs(priceLine);
                                     } else {
-                                        this.notifySubs(null);
+                                        this.notifySubs(priceLine);
                                     }
                                 },
-                                error => {
+                                (                                error: any) => {
                                     console.log('Error Getting Data');
                                 }
                             )
@@ -157,7 +158,7 @@ export class PriceDataService {
                         console.log('Error Getting Data');
                     }
                 },
-                error => {
+                (                error: any) => {
                     console.log('Error Getting Data');
                 }
             )
@@ -188,15 +189,14 @@ export class PriceDataService {
      */
     public getPriceDataPoint(fromSymbol: string, exchange: string, timeStamp: string, priceType: string) {
         this.apiService.getHistoricalDataPoint(fromSymbol, exchange, timeStamp)
-        .subscribe(
-            response => {
-                response.priceType = priceType;
-                this.notifyDataPointSubs(response);
-            },
-            error => {
-                console.log('Error Getting Data');
-            }
-        )
+            .subscribe(
+                response => {
+                    this.notifyDataPointSubs(response as PriceLine);
+                },
+                error => {
+                    console.log('Error Getting Data');
+                }
+            )
     }
 
     /**

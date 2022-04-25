@@ -9,13 +9,14 @@ export class ExcludePipe implements PipeTransform {
         } else if (dataType == 'array') {
             return this.transformArray(dataObject, excludeList);
         }
+        return dataObject;
     }
 
     private transformObject(dataObject: any, excludeList: string[]) {
         let filteredDataObject = {};
         for (let key in dataObject) {
             if (! excludeList.includes(key)) {
-                filteredDataObject[key] = dataObject[key];
+                filteredDataObject[key as keyof Object] = dataObject[key];
             }
         }
         return filteredDataObject;
@@ -28,7 +29,7 @@ export class ExcludePipe implements PipeTransform {
             let newObject = {};
             for (let key in dataObject) {
                 if (! excludeList.includes(key)) {
-                    newObject[key] = dataObject[key];
+                    newObject[key as keyof Object] = dataObject[key];
                 }
             }
             filteredDataArray.push(newObject);

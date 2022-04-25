@@ -4,9 +4,9 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 
 @Component({
     selector: 'app-settings-modal',
-    templateUrl: 'app/components/modals/settings-modal/settings-modal.component.html',
+    templateUrl: './settings-modal.component.html',
     styleUrls: [
-        'app/components/modals/settings-modal/settings-modal.component.scss'
+        './settings-modal.component.scss'
     ]
 })
 

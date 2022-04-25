@@ -5,4 +5,5 @@ export interface ChartData {
     close: number;
     high: number;
     low: number;
+    profit?: number;
 }

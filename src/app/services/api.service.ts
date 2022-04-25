@@ -1,8 +1,8 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { PriceData } from '../models/price-data.model';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class ApiService {
     private aggregate: string = '1';
 
 
-    constructor(private http: Http) {}
+    constructor(private http: HttpClient) {}
 
     public setTimeUnit(timeUnit: string) {
         this.timeUnit = timeUnit;
@@ -60,20 +60,12 @@ export class ApiService {
 
         for (let param in params) {
             if (params.hasOwnProperty(param)) {
-                paramList.push(param + '=' + params[param]);
+                paramList.push(param + '=' + params[param as keyof Object]);
             }
         }
         let url = ApiService.BASE_URL + '/histo' + this.timeUnit + '?'  + paramList.join('&');
 
-        let priceData = this.http.get(url)
-            .map(response => <PriceData[]>response.json().Data)
-            .catch((error: any) => {
-                console.log(error);
-
-                return Observable.throw(error.statusText);
-            });
-
-        return priceData;
+        return this.http.get(url)
     }
 
     /**
@@ -90,15 +82,7 @@ export class ApiService {
 
         console.log(url);
 
-        let priceDataPoint = this.http.get(url)
-            .map(response => response.json())
-            .catch((error: any) => {
-                console.log(error);
-
-                return Observable.throw(error.statusText);
-            });
-
-        return priceDataPoint;
+        return this.http.get(url)
     }
 
 }

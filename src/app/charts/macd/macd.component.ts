@@ -11,9 +11,9 @@ import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-macd',
-    templateUrl: 'app/components/charts/macd/macd.component.html',
+    templateUrl: './macd.component.html',
     styleUrls: [
-        'app/components/charts/macd/macd.component.scss'
+        './macd.component.scss'
     ]
 })
 

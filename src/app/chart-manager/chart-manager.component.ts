@@ -17,9 +17,9 @@ import { ChartData } from '../models/chart-data.model';
 
 @Component({
     selector: 'app-chart-manager',
-    templateUrl: 'app/components/chart-manager/chart-manager.component.html',
+    templateUrl: './chart-manager.component.html',
     styleUrls: [
-        'app/components/chart-manager/chart-manager.component.scss'
+        './chart-manager.component.scss'
     ],
     viewProviders: [DragulaService],
 })

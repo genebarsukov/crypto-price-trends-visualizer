@@ -10,9 +10,9 @@ import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-stochastic',
-    templateUrl: 'app/components/charts/stochastic/stochastic.component.html',
+    templateUrl: './stochastic.component.html',
     styleUrls: [
-        'app/components/charts/stochastic/stochastic.component.scss'
+        './stochastic.component.scss'
     ]
 })
 

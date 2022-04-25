@@ -48,7 +48,7 @@
                         (ngModelChange)="updateData()">
                     <option *ngFor="let period of periods" 
                             class="time-settings-period-option" 
-                            [ngValue]="period">
+                            [value]="period">
                         {{ period.name }}
                     </option>
                 </select>

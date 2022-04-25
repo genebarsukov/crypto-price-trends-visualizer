@@ -12,8 +12,8 @@ export class D3ChartService {
     protected svg: any;
     protected x: any;
     protected y: any;
-    protected priceLine: PriceLine;
-    protected chartData: ChartData[];
+    protected priceLine!: PriceLine;
+    protected chartData!: ChartData[];
     protected selected: boolean = false;
     protected chartType: string = '';
 
@@ -140,7 +140,6 @@ export class D3ChartService {
                 .attr('transform', 'translate(0,' + this.height + ')')
                 .call(this.makeXGridlines()
                     .tickSize(-this.height)
-                    .tickFormat('')
                 );
 
         // Add Y gridlines
@@ -149,7 +148,6 @@ export class D3ChartService {
                 .attr('opacity', '0.1')
                 .call(this.makeYGridlines()
                     .tickSize(-this.width)
-                    .tickFormat('')
                 );
     }
     

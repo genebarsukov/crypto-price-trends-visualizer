@@ -11,9 +11,9 @@ import * as d3Array from 'd3-array';
 
 @Injectable()
 export class D3MACDService extends D3ChartService {
-    private line: d3Shape.Line<[number, number]>;
-    private MACDLine: d3Shape.Line<[number, number]>;
-    private signalLine: d3Shape.Line<[number, number]>;
+    private line!: d3Shape.Line<[number, number]>;
+    private MACDLine!: d3Shape.Line<[number, number]>;
+    private signalLine!: d3Shape.Line<[number, number]>;
 
 
     constructor() {
@@ -21,11 +21,11 @@ export class D3MACDService extends D3ChartService {
         this.setChartType('macd');
     }
 
-    public getBuyLimit() {
+    public override getBuyLimit() {
         return 0;
     }
 
-    public getSellLimit() {
+    public override getSellLimit() {
         return 0;
     }
 
@@ -36,7 +36,7 @@ export class D3MACDService extends D3ChartService {
         this.drawLine();
     }
 
-    public updateColor(priceLine: PriceLine) {
+    public override updateColor(priceLine: PriceLine) {
         if (priceLine.data) {
             this.svg.selectAll('.line-' + priceLine.index.toString()).remove();
             this.drawLine();

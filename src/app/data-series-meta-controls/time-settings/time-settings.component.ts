@@ -6,9 +6,9 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 
 @Component({
     selector: 'app-time-settings',
-    templateUrl: 'app/components/time-settings/time-settings.component.html',
+    templateUrl: './time-settings.component.html',
     styleUrls: [
-        'app/components/time-settings/time-settings.component.scss'
+        './time-settings.component.scss'
     ]
 })
 
@@ -20,7 +20,7 @@ export class TimeSettingsComponent implements OnInit {
     private timeUnit: string = 'minute';
     private limit: string = '1440';
     private aggregate: string = '1';
-    private selectedPeriod: any;
+    selectedPeriod: any;
     private periods: any[] = [
         { index: 0, name: 'Hour', unit: 'minute', limit: '60'},
         { index: 1, name: '12 Hour', unit: 'minute', limit: '720'},

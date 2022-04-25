@@ -1,12 +1,13 @@
 import { Component, forwardRef, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Colors } from 'src/app/models/colors.model';
 import { ChartSettingsService } from '../../services/settings/chart-settings.service';
 
 @Component({
     selector: 'app-color-picker',
-    templateUrl: 'app/components/color-picker/color-picker.component.html',
+    templateUrl: './color-picker.component.html',
     styleUrls: [
-        'app/components/color-picker/color-picker.component.scss'
+        './color-picker.component.scss'
     ],
     providers: [
     {
@@ -20,10 +21,10 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
     },
 })
 export class ColorPickerComponent implements ControlValueAccessor  {
-    private paletteHidden: boolean = true;
-    private selectedColor!: string;
+    paletteHidden: boolean = true;
+    selectedColor!: string;
     propagateChange = (color: string) => {};
-    private colors: Object = {
+    colors: Colors = {
         blues: [
             'blue',
             'steelblue',
@@ -75,9 +76,9 @@ export class ColorPickerComponent implements ControlValueAccessor  {
     };
 
 
-    constructor(private elementRef: ElementRef, private chartSettingsService: ChartSettingsService) {}
+    constructor(private elementRef: ElementRef, public chartSettingsService: ChartSettingsService) {}
 
-    private togglePalette() {
+    togglePalette() {
         this.paletteHidden = this.paletteHidden ? false : true;
     }
 
@@ -86,11 +87,11 @@ export class ColorPickerComponent implements ControlValueAccessor  {
             this.hidePalette();
         }
     }
-    private hidePalette() {
+    hidePalette() {
         this.paletteHidden = true;
     }
 
-    private selectColor(color: string) {
+    selectColor(color: string) {
         this.writeValue(color);
         this.hidePalette();
     }

@@ -4,42 +4,42 @@
     </div>
     <div class="color-palette" [class.hidden]="paletteHidden" (click)="hidePalette()">
         <div class="color-palette-column">
-            <div *ngFor="let color of colors.blues" 
+            <div *ngFor="let color of colors?.blues" 
                  class="palette-color" 
                  [style.background-color]="color"
                  (click)="selectColor(color)">
             </div>
         </div>
         <div class="color-palette-column">
-            <div *ngFor="let color of colors.greens" 
+            <div *ngFor="let color of colors?.greens" 
                  class="palette-color" 
                  [style.background-color]="color"
                  (click)="selectColor(color)">
             </div>
         </div>
         <div class="color-palette-column">
-            <div *ngFor="let color of colors.yellows" 
+            <div *ngFor="let color of colors?.yellows" 
                   class="palette-color" 
                   [style.background-color]="color"
                   (click)="selectColor(color)">
             </div>
         </div>
         <div class="color-palette-column">
-            <div *ngFor="let color of colors.reds" 
+            <div *ngFor="let color of colors?.reds" 
                   class="palette-color" 
                   [style.background-color]="color"
                   (click)="selectColor(color)">
             </div>
         </div>
         <div class="color-palette-column">
-                <div *ngFor="let color of colors.magentas" 
+                <div *ngFor="let color of colors?.magentas" 
                       class="palette-color" 
                       [style.background-color]="color"
                       (click)="selectColor(color)">
                 </div>
             </div>
         <div class="color-palette-column">
-            <div *ngFor="let color of colors.grays" 
+            <div *ngFor="let color of colors?.grays" 
                   class="palette-color" 
                   [style.background-color]="color"
                   (click)="selectColor(color)">

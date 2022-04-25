@@ -10,9 +10,9 @@ import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-rsi',
-    templateUrl: 'app/components/charts/rsi/rsi.component.html',
+    templateUrl: './rsi.component.html',
     styleUrls: [
-        'app/components/charts/rsi/rsi.component.scss'
+        './rsi.component.scss'
     ]
 })
 

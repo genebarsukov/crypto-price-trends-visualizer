@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class ChartSettingsService {
@@ -93,7 +93,7 @@ export class ChartSettingsService {
         let activeIndicators = [];
 
         for (let setting in this.settings.chart) {
-            if (this.settings.chart[setting].active) {
+            if ((this.settings.chart[setting as keyof Object] as unknown as { name: string, active: boolean }).active) {
                 activeIndicators.push(setting);
             }
         }
@@ -101,7 +101,7 @@ export class ChartSettingsService {
     }
 
     public getSetting(settingType: string, setting: string) {
-        return this.settings[settingType][setting];
+        return this.settings[settingType as keyof Object][setting as keyof Object];
     }
 
     public setSessionData() {
@@ -130,7 +130,7 @@ export class ChartSettingsService {
     private updateSessionSettings(sessionSettings: any) {
         for (let key in this.settings) {
             if (!sessionSettings[key]) {
-                sessionSettings[key] = this.settings[key];
+                sessionSettings[key] = this.settings[key as keyof Object];
             }
         }
         return sessionSettings;

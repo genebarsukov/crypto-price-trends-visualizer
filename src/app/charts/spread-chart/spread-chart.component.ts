@@ -12,9 +12,9 @@ import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-spread-chart',
-    templateUrl: 'app/components/charts/spread-chart/spread-chart.component.html',
+    templateUrl: '.spread-chart.component.html',
     styleUrls: [
-        'app/components/charts/spread-chart/spread-chart.component.scss'
+        './spread-chart.component.scss'
     ]
 })
 export class SpreadChartComponent extends ChartComponent implements OnInit {

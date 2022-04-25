@@ -4,9 +4,9 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 
 @Component({
     selector: 'app-alert-modal',
-    templateUrl: 'app/components/modals/alert-modal/alert-modal.component.html',
+    templateUrl: './alert-modal.component.html',
     styleUrls: [
-        'app/components/modals/alert-modal/alert-modal.component.scss'
+        './alert-modal.component.scss'
     ],
 host: {
     '(document:keydown.enter)': 'dismissModal()',

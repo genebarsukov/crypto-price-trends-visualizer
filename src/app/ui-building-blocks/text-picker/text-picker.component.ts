@@ -6,11 +6,11 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 
 @Component({
     selector: 'app-text-picker',
-    templateUrl: 'app/components/text-picker/text-picker.component.html',
+    templateUrl: './text-picker.component.html',
     styleUrls: [
-        'app/components/text-picker/text-picker.component.scss',
-        'app/components/text-picker/text-picker-light.component.scss',
-        'app/components/text-picker/text-picker-dark.component.scss'
+        './text-picker.component.scss',
+        './text-picker-light.component.scss',
+        './text-picker-dark.component.scss'
     ],
     providers: [
         {
@@ -24,8 +24,8 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
     },
 })
 export class TextPickerComponent implements ControlValueAccessor  {
-    private listHidden: boolean = true;
-    private selectedItem: any;
+    listHidden: boolean = true;
+    selectedItem: any;
     propagateChange = (text: string) => {};
     @Input() iconSize: string = 'small';
     @Output() disabledCheck = new EventEmitter();
@@ -37,10 +37,10 @@ export class TextPickerComponent implements ControlValueAccessor  {
 
 
     constructor(private elementRef: ElementRef, 
-                private iconSettingsService: IconSettingsService,
-                private chartSettingsService: ChartSettingsService) {}
+                public iconSettingsService: IconSettingsService,
+                public chartSettingsService: ChartSettingsService) {}
 
-    private toggleList() {
+    toggleList() {
         if (this.items.length) {
             this.listHidden = this.listHidden ? false : true;
         }
@@ -58,7 +58,7 @@ export class TextPickerComponent implements ControlValueAccessor  {
         this.listHidden = true;
     }
 
-    private selectItem(item: any) {
+    selectItem(item: any) {
         if(!item.disabled) {
             this.writeValue(item.value);
             this.hideList();

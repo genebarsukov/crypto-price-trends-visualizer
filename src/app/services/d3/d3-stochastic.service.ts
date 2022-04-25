@@ -11,9 +11,9 @@ import * as d3Array from 'd3-array';
 
 @Injectable()
 export class D3StochasticService extends D3ChartService {
-    private line: d3Shape.Line<[number, number]>;
-    private overBoughtLine: d3Shape.Line<[number, number]>;
-    private overSoldLine: d3Shape.Line<[number, number]>;
+    private line!: d3Shape.Line<[number, number]>;
+    private overBoughtLine!: d3Shape.Line<[number, number]>;
+    private overSoldLine!: d3Shape.Line<[number, number]>;
 
     private overbought: number = 70;
     private oversold: number = 30;
@@ -31,11 +31,11 @@ export class D3StochasticService extends D3ChartService {
         this.oversold = oversold;
     }
 
-    public getBuyLimit() {
+    public override getBuyLimit() {
         return this.oversold;
     }
 
-    public getSellLimit() {
+    public override getSellLimit() {
         return this.overbought;
     }
 
@@ -46,7 +46,7 @@ export class D3StochasticService extends D3ChartService {
         this.drawLine();
     }
 
-    public updateColor(priceLine: PriceLine) {
+    public override updateColor(priceLine: PriceLine) {
         if (priceLine.data) {
             this.svg.selectAll('.line-' + priceLine.index.toString()).remove();
             this.drawLine();

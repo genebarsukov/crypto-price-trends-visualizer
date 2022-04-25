@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
-import { PriceLine } from '../../models/price-line.model';
 import { ChartData } from '../../models/chart-data.model';
 import { D3ChartService } from './d3-chart.service';
 
-import * as d3 from 'd3';
-import * as d3Scale from 'd3-scale';
-import * as d3Shape from 'd3-shape';
-import * as d3Array from 'd3-array';
-import * as d3Axis from 'd3-axis';
 import { D3RSIService } from './d3-rsi.service';
 import { D3PriceChartService } from './d3-price-chart.service';
 import { D3StochasticService } from './d3-stochastic.service';
@@ -23,7 +17,7 @@ export class D3AlgoTesterService {
         'MACD': null
     };
     private priceService: D3PriceChartService;
-    selectedService: D3ChartService;
+    selectedService!: D3ChartService;
 
     private buyPoints: ChartData[] = [];
     private sellPoints: ChartData[] = []; 
@@ -104,7 +98,7 @@ export class D3AlgoTesterService {
                     date: new Date(chartService.getChartData()[index].date.getTime()), 
                     value: chartService.getChartData()[index].value
                 });
-                this.sellPoints[this.sellPoints.length - 1]['profit'] = Math.round(this.sellPoints[this.sellPoints.length - 1].value - previousBuyValue);
+                this.sellPoints[this.sellPoints.length - 1].profit = Math.round(this.sellPoints[this.sellPoints.length - 1].value - previousBuyValue);
                 previousPointType = 'sell';
             }
         }

@@ -11,9 +11,9 @@ import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-price-chart',
-    templateUrl: 'app/components/charts/price-chart/price-chart.component.html',
+    templateUrl: './price-chart.component.html',
     styleUrls: [
-        'app/components/charts/price-chart/price-chart.component.scss'
+        './price-chart.component.scss'
     ]
 })
 export class PriceChartComponent extends ChartComponent implements OnInit {

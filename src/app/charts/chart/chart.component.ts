@@ -6,9 +6,9 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 
 @Component({
     selector: 'app-chart',
-    templateUrl: 'app/components/charts/chart/chart.component.html',
+    templateUrl: './chart.component.html',
     styleUrls: [
-        'app/components/charts/chart/chart.component.scss'
+        './chart.component.scss'
     ]
 })
 

@@ -11,10 +11,10 @@ import * as d3Array from 'd3-array';
 
 @Injectable()
 export class D3SpreadChartService extends D3ChartService {
-    private firstLine: d3Shape.Line<[number, number]>;
-    private secondLine: d3Shape.Line<[number, number]>;
+    private firstLine!: d3Shape.Line<[number, number]>;
+    private secondLine!: d3Shape.Line<[number, number]>;
 
-    private priceLines: PriceLine[];
+    private priceLines!: PriceLine[];
 
     constructor() {
         super();

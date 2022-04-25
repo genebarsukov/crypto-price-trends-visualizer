@@ -5,9 +5,9 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 
 @Component({
     selector: 'app-current-price-percent',
-    templateUrl: 'app/components/current-price-percent/current-price-percent.component.html',
+    templateUrl: './current-price-percent.component.html',
     styleUrls: [
-        'app/components/current-price-percent/current-price-percent.component.scss'
+        './current-price-percent.component.scss'
     ]
 })
 
