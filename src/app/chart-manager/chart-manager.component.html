@@ -11,59 +11,59 @@
                 <!-- Line Settings -->
                 <div *ngIf="control=='LineSettings'"
                         class="control-container line-settings-container">
-                    <line-settings *ngFor="let line of lines let i = index"
+                    <app-line-settings *ngFor="let line of lines let i = index"
                                     [priceLine]="line"
-                                    (onRebuildSvg)="rebuildSvg($event)" 
-                                    (onColorUpdated)="colorUpdated($event)"
-                                    (onRemove)="removeLine($event)">
-                    </line-settings>
+                                    (onRebuildSvg)="rebuildSvg(line)" 
+                                    (onColorUpdated)="colorUpdated(line)"
+                                    (onRemove)="removeLine(i)">
+                    </app-line-settings>
                 </div>
                 
                 <!-- Time Settings -->
-                <time-settings *ngIf="control=='TimeSettings'" 
+                <app-time-settings *ngIf="control=='TimeSettings'" 
                                 #timeSettings
                                 (onRebuildSvg)="updateAllAndRebuildSvg()">
-                </time-settings>
+                </app-time-settings>
                 
                 <!-- Current Price Percent -->
-                <current-price-percent *ngIf="control=='CurrentPricePercent'" 
+                <app-current-price-percent *ngIf="control=='CurrentPricePercent'" 
                                         #currentPricePercentComponent 
                                         [priceLine]="lines[0]">
-                </current-price-percent>
+                </app-current-price-percent>
 
                 <!-- Price Chart -->
-                <price-chart *ngIf="control=='PriceChartComponent' && chartSettingsService.getActiveCharts().includes('PriceChart')"
+                <app-price-chart *ngIf="control=='PriceChartComponent' && chartSettingsService.getActiveCharts().includes('PriceChart')"
                                 #priceChartComponent 
                                 [lines]="lines"
                                 [scale]="scale"
                                 [scalePercent]="scalePercent">
-                </price-chart>
+                </app-price-chart>
 
                 <!-- RSI -->
-                <rsi *ngIf="control=='RSIComponent' && chartSettingsService.getActiveCharts().includes('RSI')" 
+                <app-rsi *ngIf="control=='RSIComponent' && chartSettingsService.getActiveCharts().includes('RSI')" 
                         #rsiComponent 
                         [priceLine]="lines[0]">
-                </rsi>
+                </app-rsi>
                 
                 <!-- Stochastic -->
-                <stochastic *ngIf="control=='StochasticComponent' && chartSettingsService.getActiveCharts().includes('Stochastic')" 
+                <app-stochastic *ngIf="control=='StochasticComponent' && chartSettingsService.getActiveCharts().includes('Stochastic')" 
                             #stochasticComponent 
                             [priceLine]="lines[0]">
-                </stochastic>
+                </app-stochastic>
                 
                 <!-- MACD -->
-                <macd *ngIf="control=='MACDComponent'  && chartSettingsService.getActiveCharts().includes('MACD')" 
+                <app-macd *ngIf="control=='MACDComponent'  && chartSettingsService.getActiveCharts().includes('MACD')" 
                         #macdComponent 
                         [priceLine]="lines[0]">
-                </macd>
+                </app-macd>
 
                 <!-- Spread Chart -->
-                <spread-chart *ngIf="control=='SpreadChartComponent'  && chartSettingsService.getActiveCharts().includes('SpreadChart')" 
+                <app-spread-chart *ngIf="control=='SpreadChartComponent'  && chartSettingsService.getActiveCharts().includes('SpreadChart')" 
                                 #spreadChartComponent 
                                 [lines]="lines"
-                                [firstLineIndex]="'0'"
-                                [secondLineIndex]="'1'">
-                </spread-chart>
+                                [firstLineIndex]="0"
+                                [secondLineIndex]="1">
+                </app-spread-chart>
             </div>
         </div>
     </div>
@@ -141,23 +141,23 @@
     </div>
 
     <!-- Algo Tetser -->
-    <algo-tester *ngIf="algoTesterIsShown"
+    <app-algo-tester *ngIf="algoTesterIsShown"
                  #algoTester 
                  (onDismissed)="toggleAlgoTester()"
                  (onUpdateChartSettings)="updateChartSettings($event)">
-    </algo-tester>
+    </app-algo-tester>
 
     <!-- Rulers -->
     <div #horizontalRuler [hidden]="horizontalRulerHidden" class="chart-ruler horizontal"> </div>
     <div #verticalRuler [hidden]="verticalRulerHidden" class="chart-ruler vertical"> </div>
 
     <!-- Alert Modal -->
-    <alert-modal [messageHeader]="'Data Response Error'"
+    <app-alert-modal [messageHeader]="'Data Response Error'"
                     [messageText]="errorMessage"
                     [messageButtonText]="'Ok'"
-                    [isShown]="errorMessage"
+                    [isShown]="errorMessage.length > 0"
                     (onModalDismissed)="hideErrorModal()">
-    </alert-modal>
+    </app-alert-modal>
 
     <!-- Loading -->
     <div [hidden]="!isLoading" class="loader">

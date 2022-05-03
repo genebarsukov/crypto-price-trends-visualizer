@@ -22,12 +22,12 @@ export class HelpModalComponent {
 
     @Output() onModalDismissed: EventEmitter<string> = new EventEmitter();
 
-    private bullet: string = '&#x27A7;';
+    bullet: string = '&#x27A7;';
 
 
-    constructor(private chartSettingsService: ChartSettingsService) {}
+    constructor(public chartSettingsService: ChartSettingsService) {}
 
-    private dismissModal() {
+    dismissModal() {
         this.onModalDismissed.emit();
     }
 

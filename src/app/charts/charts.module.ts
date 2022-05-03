@@ -6,6 +6,7 @@ import { PriceChartComponent } from './price-chart/price-chart.component';
 import { RSIComponent } from './rsi/rsi.component';
 import { SpreadChartComponent } from './spread-chart/spread-chart.component';
 import { StochasticComponent } from './stochastic/stochastic.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,15 @@ import { StochasticComponent } from './stochastic/stochastic.component';
     StochasticComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
+  ],
+  exports: [
+    MACDComponent,
+    PriceChartComponent,
+    RSIComponent,
+    SpreadChartComponent,
+    StochasticComponent
   ]
 })
 export class ChartsModule { }

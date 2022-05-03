@@ -1,4 +1,3 @@
-import 'rxjs/add/operator/map';
 import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -6,7 +5,6 @@ import { PriceData } from '../models/price-data.model';
 import { ChartData } from '../models/chart-data.model';
 import { PriceLine } from '../models/price-line.model';
 import { Observable } from 'rxjs';
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()
 export class PriceDataService {

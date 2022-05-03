@@ -18,15 +18,15 @@ import { MessageService } from '../../services/message.service';
 })
 export class PriceChartComponent extends ChartComponent implements OnInit {
     @Input() lines: PriceLine[] = [];
-    @Input() private scale: boolean = false;
-    @Input() private scalePercent: boolean = false;
-    private shapeIterations: number = 3;
+    @Input() scale: boolean = false;
+    @Input() scalePercent: boolean = false;
+    shapeIterations: number = 3;
 
     constructor(private d3PriceChartService: D3PriceChartService,
-                private d3CurveShapeService: D3CurveShapeService,
+                public d3CurveShapeService: D3CurveShapeService,
                 private scalingService: ScalingService,
-                private iconSettingsService: IconSettingsService,
-                protected override chartSettingsService: ChartSettingsService,
+                public iconSettingsService: IconSettingsService,
+                public override chartSettingsService: ChartSettingsService,
                 protected override messageService: MessageService) {
                     super(d3PriceChartService, chartSettingsService, messageService);
                 }
@@ -64,12 +64,12 @@ export class PriceChartComponent extends ChartComponent implements OnInit {
     /**
      * Chart sizing
      */
-    protected override sizeChartUp() {
+    override sizeChartUp() {
         super.sizeChartUp();
         this.d3PriceChartService.buildChart();
     }
 
-    protected override sizeChartDown() {
+    override sizeChartDown() {
         super.sizeChartDown();
         this.d3PriceChartService.buildChart();
     }

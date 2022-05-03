@@ -1,9 +1,5 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PriceData } from '../models/price-data.model';
 
 @Injectable()
 export class ApiService {

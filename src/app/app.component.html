@@ -20,18 +20,19 @@
           <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> How to... </span>
       </div>
   </div>
-  <chart-manager></chart-manager>
+  <app-chart-manager>
+  </app-chart-manager>
 </div>
-<settings-modal [messageHeader]="'Settings'"
+<app-settings-modal [messageHeader]="'Settings'"
               [messageButtonText]="'Ok'"
               [isShown]="settingsShown"
               (onModalDismissed)="toggleSettingsModal()">
-</settings-modal>
-<help-modal [messageHeader]="'About This App'"
+</app-settings-modal>
+<app-help-modal [messageHeader]="'About This App'"
           [messageButtonText]="'Ok'"
           [isShown]="helpShown"
           (onModalDismissed)="toggleHelpModal()">
-</help-modal>
+</app-help-modal>
 <div *ngIf="errorMessage" 
    class="warning-message"
    [ngClass]="warningClass"

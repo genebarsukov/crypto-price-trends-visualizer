@@ -100,7 +100,7 @@ export class ChartSettingsService {
         return activeIndicators;
     }
 
-    public getSetting(settingType: string, setting: string) {
+    public getSetting(settingType: string, setting: string): any {
         return this.settings[settingType as keyof Object][setting as keyof Object];
     }
 

@@ -11,6 +11,10 @@ import { TextPickerComponent } from './text-picker/text-picker.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    TextPickerComponent,
+    ColorPickerComponent
   ]
 })
 export class UiBuildingBlocksModule { }

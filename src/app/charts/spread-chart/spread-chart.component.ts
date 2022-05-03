@@ -12,7 +12,7 @@ import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-spread-chart',
-    templateUrl: '.spread-chart.component.html',
+    templateUrl: './spread-chart.component.html',
     styleUrls: [
         './spread-chart.component.scss'
     ]
@@ -22,17 +22,15 @@ export class SpreadChartComponent extends ChartComponent implements OnInit {
     @Input() firstLineIndex: number = 0;
     @Input() secondLineIndex: number = 1;
 
-    private warning: string = 'Warning: Not enough lines to build spread between. Must have at least 2. Please add more lines to the chart. Showing last rendered chart.';
+    warning: string = 'Warning: Not enough lines to build spread between. Must have at least 2. Please add more lines to the chart. Showing last rendered chart.';
     private scaledLines: PriceLine[] = [];
-    private scaleType: string = 'Percent';
-    // private errorMessage: string;
-
+    scaleType: string = 'Percent';
 
     constructor(private d3SpreadChartService: D3SpreadChartService,
                 private scalingService: ScalingService,
                 private errorService: ErrorService,
-                private iconSettingsService: IconSettingsService,
-                protected override chartSettingsService: ChartSettingsService,
+                public iconSettingsService: IconSettingsService,
+                public override chartSettingsService: ChartSettingsService,
                 protected override messageService: MessageService) {
         super(d3SpreadChartService, chartSettingsService, messageService);
     }
@@ -88,7 +86,7 @@ export class SpreadChartComponent extends ChartComponent implements OnInit {
         return spread;
     }
 
-    private toggleScaleType() {
+    toggleScaleType() {
         this.scaleType = this.scaleType === 'Percent' ? 'Price' : 'Percent';
         this.updateChart();
     }
@@ -100,14 +98,14 @@ export class SpreadChartComponent extends ChartComponent implements OnInit {
     /**
      * Chart sizing
      */
-    protected override sizeChartUp() {
+    override sizeChartUp() {
         super.sizeChartUp();
         if (this.lines.length >= 2) {
             this.d3SpreadChartService.buildChart();
         }
     }
 
-    protected override sizeChartDown() {
+    override sizeChartDown() {
         super.sizeChartDown();
         if (this.lines.length >= 2) {
             this.d3SpreadChartService.buildChart();

@@ -21,15 +21,15 @@ export class StochasticComponent extends ChartComponent implements OnInit {
     priceLine!: PriceLine;
 
     private stochasticData: ChartData[] = [];
-    private period: number = 14;
-    private overbought: number = 80;
-    private oversold: number = 20;
-    private SMAPeriod: number = 5;
+    period: number = 14;
+    overbought: number = 80;
+    oversold: number = 20;
+    SMAPeriod: number = 5;
 
 
     constructor(private d3StochasticSrvice: D3StochasticService,
-                private iconSettingsService: IconSettingsService,
-                protected override chartSettingsService: ChartSettingsService,
+                public iconSettingsService: IconSettingsService,
+                public override chartSettingsService: ChartSettingsService,
                 protected override messageService: MessageService) {
         super(d3StochasticSrvice, chartSettingsService, messageService);
     }
@@ -46,11 +46,11 @@ export class StochasticComponent extends ChartComponent implements OnInit {
         this.d3StochasticSrvice.buildChart();
     }
 
-    private updateOverBought() {
+    updateOverBought() {
         this.d3StochasticSrvice.setOverBought(this.overbought);
     }
 
-    private updateOverSold() {
+    updateOverSold() {
         this.d3StochasticSrvice.setOverSold(this.oversold);
     }
 
@@ -182,13 +182,13 @@ export class StochasticComponent extends ChartComponent implements OnInit {
         return dataCopy;
     }
 
-    protected override sizeChartUp() {
+    override sizeChartUp() {
         super.sizeChartUp();
         this.d3StochasticSrvice.clearSvg();
         this.d3StochasticSrvice.buildChart();
     }
 
-    protected override sizeChartDown() {
+    override sizeChartDown() {
         super.sizeChartDown();
         this.d3StochasticSrvice.clearSvg();
         this.d3StochasticSrvice.buildChart();

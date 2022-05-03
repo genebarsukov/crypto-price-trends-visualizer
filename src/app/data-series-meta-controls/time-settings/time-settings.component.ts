@@ -17,11 +17,11 @@ export class TimeSettingsComponent implements OnInit {
     private MIN_LIMIT: number = 15;
     private MAX_LIMIT: number = 1440;
 
-    private timeUnit: string = 'minute';
-    private limit: string = '1440';
+    timeUnit: string = 'minute';
+    limit: string = '1440';
     private aggregate: string = '1';
     selectedPeriod: any;
-    private periods: any[] = [
+    periods: any[] = [
         { index: 0, name: 'Hour', unit: 'minute', limit: '60'},
         { index: 1, name: '12 Hour', unit: 'minute', limit: '720'},
         { index: 2, name: 'Day', unit: 'minute', limit: '1440'},
@@ -31,12 +31,12 @@ export class TimeSettingsComponent implements OnInit {
         { index: 6, name: '6 Months', unit: 'day', limit: '183'},
         { index: 7, name: 'Year', unit: 'day', limit: '365'}
     ];
-    private sliderEnabled: boolean = true;
+    sliderEnabled: boolean = true;
 
 
     constructor(private priceDataService: PriceDataService, 
                 private timeSettingsSettingsService: TimeSettingsSettingsService, 
-                private chartSettingsService: ChartSettingsService) {}
+                public chartSettingsService: ChartSettingsService) {}
 
     ngOnInit() {
         this.selectedPeriod = this.periods[this.timeSettingsSettingsService.getSelectedPeriodIndex()];
@@ -52,7 +52,7 @@ export class TimeSettingsComponent implements OnInit {
         this.priceDataService.setTimeSettings(this.timeUnit, this.limit, this.aggregate);
     }
 
-    private switchTimeUnit(timeUnit: string) {
+    switchTimeUnit(timeUnit: string) {
         this.timeUnit = timeUnit;
         this.priceDataService.setTimeUnit(timeUnit);
         this.updateSelectedPeriod();
@@ -66,7 +66,7 @@ export class TimeSettingsComponent implements OnInit {
         this.sliderEnabled = true;
     }
 
-    private switchLimit(event: any) {
+    switchLimit(event: any) {
         this.limit = event.srcElement.value;
         if (parseInt(this.limit, 10) < this.MIN_LIMIT) {
             this.limit = this.MIN_LIMIT.toString();

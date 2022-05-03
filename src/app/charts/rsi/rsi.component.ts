@@ -21,15 +21,15 @@ export class RSIComponent extends ChartComponent implements OnInit {
     priceLine!: PriceLine;
 
     private rsiData: ChartData[] = [];
-    private period: number = 14;
-    private overbought: number = 70;
-    private oversold: number = 30;
-    private SMAPeriod: number = 3;
+    period: number = 14;
+    overbought: number = 70;
+    oversold: number = 30;
+    SMAPeriod: number = 3;
 
 
     constructor(private d3RSIService: D3RSIService, 
-                private iconSettingsService: IconSettingsService,
-                protected override chartSettingsService: ChartSettingsService,
+                public iconSettingsService: IconSettingsService,
+                public override chartSettingsService: ChartSettingsService,
                 protected override messageService: MessageService) {
         super(d3RSIService, chartSettingsService, messageService);
     }
@@ -46,11 +46,11 @@ export class RSIComponent extends ChartComponent implements OnInit {
         this.d3RSIService.buildChart();
     }
 
-    private updateOverBought() {
+    updateOverBought() {
         this.d3RSIService.setOverBought(this.overbought);
     }
 
-    private updateOverSold() {
+    updateOverSold() {
         this.d3RSIService.setOverSold(this.oversold);
     }
 
@@ -159,13 +159,13 @@ export class RSIComponent extends ChartComponent implements OnInit {
         return dataCopy;
     }
 
-    protected override sizeChartUp() {
+    override sizeChartUp() {
         super.sizeChartUp();
         this.d3RSIService.clearSvg();
         this.d3RSIService.buildChart();
     }
 
-    protected override sizeChartDown() {
+    override sizeChartDown() {
         super.sizeChartDown();
         this.d3RSIService.clearSvg();
         this.d3RSIService.buildChart();

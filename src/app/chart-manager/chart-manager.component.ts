@@ -45,18 +45,18 @@ export class ChartManagerComponent implements OnInit {
     @ViewChild('timeSettings')
     timeSettingsComponent!: TimeSettingsComponent;
     
-    private horizontalRulerHidden: boolean = true;
-    private verticalRulerHidden: boolean = true;
-    private rulerType = 'line';
-    private scale: boolean = false;
-    private scalePercent: boolean = false;
-    private lines: PriceLine[] = [];
+    public horizontalRulerHidden: boolean = true;
+    public verticalRulerHidden: boolean = true;
+    public rulerType = 'line';
+    public scale: boolean = false;
+    public scalePercent: boolean = false;
+    public lines: PriceLine[] = [];
     private dataRequests: number = 0;
-    private lineType: string = 'line';
-    private isLoading: boolean = false;
+    public lineType: string = 'line';
+    public isLoading: boolean = false;
     private initSetup: boolean = true;
-    private errorMessage: string = '';
-    private algoTesterIsShown!: boolean;
+    public errorMessage: string = '';
+    public algoTesterIsShown!: boolean;
 
     private row1: any = [];
     private row2: any = [];
@@ -70,7 +70,7 @@ export class ChartManagerComponent implements OnInit {
     private row10: any = [];
     private row11: any = [];
     private row12: any = [];
-    private containerRows: any[] = [
+    public containerRows: any[] = [
         this.row1,
         this.row2,
         this.row3,
@@ -88,7 +88,7 @@ export class ChartManagerComponent implements OnInit {
 
     constructor(private priceDataService: PriceDataService,
                 private dragulaService: DragulaService,
-                private chartSettingsService: ChartSettingsService,
+                public chartSettingsService: ChartSettingsService,
                 private messageService: MessageService) {}
 
     ngOnInit() {
@@ -246,7 +246,7 @@ export class ChartManagerComponent implements OnInit {
     /**
      * Rebuild the chart after a setting changes
      */
-    private rebuildSvg(priceLine: PriceLine) {
+    rebuildSvg(priceLine: PriceLine) {
         this.turnOnLoading();
         this.priceDataService.getPriceData(priceLine);
     }
@@ -257,18 +257,18 @@ export class ChartManagerComponent implements OnInit {
      * Every time we get notified of new data it gets decremented
      * When it reaches 0 we rebuild the graph
      */
-    private updateAllAndRebuildSvg() {
+    updateAllAndRebuildSvg() {
         this.dataRequests = this.lines.length;
         this.turnOnLoading();
         this.priceDataService.getPriceData(this.lines[this.dataRequests - 1]);
     }
 
-    private colorUpdated(priceLine: PriceLine) {
+    colorUpdated(priceLine: PriceLine) {
         this.updateColors(priceLine);
         
     }
 
-    private removeLine(lineIndex: number) {
+    removeLine(lineIndex: number) {
         this.priceChartComponent.removeLine(lineIndex);
     }
 
@@ -400,7 +400,7 @@ export class ChartManagerComponent implements OnInit {
         target.classList.remove('target-drop-container');
     }
 
-    private hideErrorModal() {
+    hideErrorModal() {
         this.errorMessage = '';
     }
     
@@ -408,7 +408,7 @@ export class ChartManagerComponent implements OnInit {
     /**
      * Show / Hide algo tester window.
      */
-    private toggleAlgoTester() {
+    toggleAlgoTester() {
         this.algoTesterIsShown = this.algoTesterIsShown ? false : true;
         if (!this.algoTesterIsShown) {
             this.algoTesterComponent.clearOverlays();
@@ -419,7 +419,7 @@ export class ChartManagerComponent implements OnInit {
      * Update the indicator parameters to new values - done when running algorithm optimization testing
      * @param chartSettings Settings object received from the algo tester
      */
-    private updateChartSettings(chartSettings: any) {
+    updateChartSettings(chartSettings: any) {
         if (chartSettings.chartType == 'RSI') {
             this.rsiComponent.updateChartSettings(chartSettings.render, chartSettings.period, chartSettings.overbought, chartSettings.oversold, chartSettings.SMAPeriod);
         } else if (chartSettings.chartType == 'Stochastic') {

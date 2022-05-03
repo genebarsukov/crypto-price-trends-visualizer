@@ -26,9 +26,9 @@ export class AlertModalComponent {
     @Output() onModalDismissed: EventEmitter<string> = new EventEmitter();
 
 
-    constructor(private chartSettingsService: ChartSettingsService) {}
+    constructor(public chartSettingsService: ChartSettingsService) {}
 
-    private dismissModal() {
+    dismissModal() {
         this.onModalDismissed.emit();
     }
 

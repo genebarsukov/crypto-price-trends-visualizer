@@ -22,13 +22,13 @@ export class MACDComponent extends ChartComponent implements OnInit {
     priceLine!: PriceLine;
 
     private chartData: MACDData[] = [];
-    private smallPeriod: number = 12;
-    private largePeriod: number = 26;
-    private signalPeriod: number = 9;
+    smallPeriod: number = 12;
+    largePeriod: number = 26;
+    signalPeriod: number = 9;
 
     constructor(private d3MACDService: D3MACDService,
-                private iconSettingsService: IconSettingsService,
-                protected override chartSettingsService: ChartSettingsService,
+                public iconSettingsService: IconSettingsService,
+                public override chartSettingsService: ChartSettingsService,
                 protected override messageService: MessageService) {
         super(d3MACDService, chartSettingsService, messageService);
     }
@@ -126,7 +126,7 @@ export class MACDComponent extends ChartComponent implements OnInit {
     /**
      * Increase chart size
      */
-    protected override sizeChartUp() {
+    override sizeChartUp() {
         super.sizeChartUp();
         this.d3MACDService.clearSvg();
         this.d3MACDService.buildChart();
@@ -135,7 +135,7 @@ export class MACDComponent extends ChartComponent implements OnInit {
     /**
      * Decrease chart size
      */
-    protected override sizeChartDown() {
+    override sizeChartDown() {
         super.sizeChartDown();
         this.d3MACDService.clearSvg();
         this.d3MACDService.buildChart();

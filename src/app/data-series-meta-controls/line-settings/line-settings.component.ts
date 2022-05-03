@@ -19,7 +19,7 @@ export class LineSettingsComponent implements OnInit {
     @Output() onColorUpdated = new EventEmitter();
     @Output() onRemove = new EventEmitter();
 
-    private exchanges: any[] = [
+    exchanges: any[] = [
         {name: 'Bittrex', value: 'Bittrex'},
         {name: 'Gdax', value: 'Gdax'},
         {name: 'Binance', value: 'Binance'},
@@ -36,7 +36,7 @@ export class LineSettingsComponent implements OnInit {
         {name: 'Cryptopia', value: 'Cryptopia'}
     ]
 
-    private fromCoins: any[] = [
+    fromCoins: any[] = [
         {name: 'Bitcoin', value: 'BTC', icon: 'BTC'},
         {name: 'Bit Cash', value: 'BCH', icon: 'BCH'},
         {name: 'Bitcoin Gold', value: 'BTG', icon: 'BTG'},
@@ -72,14 +72,14 @@ export class LineSettingsComponent implements OnInit {
         {name: 'Decred', value: 'DCR', icon: 'DCR'},
     ];
 
-    private toCoins: any[] = [
+    toCoins: any[] = [
         {name: '', value: 'USD', icon: 'USD'},
         {name: '', value: 'BTC', icon: 'BTC'},
         {name: '', value: 'ETH', icon: 'ETH'}
     ];
 
 
-    constructor(private chartSettingsService: ChartSettingsService, private iconSettingsService: IconSettingsService) {}
+    constructor(public chartSettingsService: ChartSettingsService, private iconSettingsService: IconSettingsService) {}
 
     ngOnInit() {
         this.updateDisabled();
@@ -103,17 +103,17 @@ export class LineSettingsComponent implements OnInit {
         this.onColorUpdated.emit(this.priceLine);
     }
 
-    private switchFromSymbol(fromSymbol: string) {
+    switchFromSymbol(fromSymbol: string) {
         this.priceLine.fromSymbol = fromSymbol;
         this.onRebuildSvg.emit(this.priceLine);
     }
 
-    private switchToSymbol(toSymbol: string) {
+    switchToSymbol(toSymbol: string) {
         this.priceLine.toSymbol = toSymbol;
         this.onRebuildSvg.emit(this.priceLine);
     }
 
-    private switchExchange(exchange: string) {
+    switchExchange(exchange: string) {
         this.priceLine.exchange = exchange;
         this.onRebuildSvg.emit(this.priceLine);
     }
@@ -121,7 +121,7 @@ export class LineSettingsComponent implements OnInit {
     /**
      * Remove the line settings and the corresponding line graph from the chart
      */
-    private removeLine() {
+    removeLine() {
         this.onRemove.emit(this.priceLine.index);
     }
 

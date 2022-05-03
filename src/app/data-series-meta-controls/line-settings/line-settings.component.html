@@ -7,26 +7,26 @@
     <div class="h-spacer-10"></div>
 
     <div class="tooltip">
-        <text-picker [items]="exchanges" 
+        <app-text-picker [items]="exchanges" 
                      [(ngModel)]="priceLine.exchange" 
                      (ngModelChange)="switchExchange(priceLine.exchange)">
-        </text-picker>
+        </app-text-picker>
         <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Switch exchange </span>
     </div>
     <div class="h-spacer-10"></div>
 
     <div class="tooltip">
-        <text-picker [items]="fromCoins" 
+        <app-text-picker [items]="fromCoins" 
                      (disabledCheck)="updateDisabled()"
                      [(ngModel)]="priceLine.fromSymbol" 
                      (ngModelChange)="switchFromSymbol(priceLine.fromSymbol)">
-        </text-picker>
+        </app-text-picker>
         <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Switch Coin Type </span>
     </div>
 
     <div class="h-spacer-30"></div>
     <div class="tooltip">
-        <text-picker [iconSize]="'medium'" 
+        <app-text-picker [iconSize]="'medium'" 
                      [customInputClass]="'small-input'"
                      [customListClass]="'small-list'"
                      [customItemClass]="'small-item'"
@@ -34,7 +34,7 @@
                      (disabledCheck)="updateDisabled()"
                      [(ngModel)]="priceLine.toSymbol" 
                      (ngModelChange)="switchToSymbol(priceLine.toSymbol)">
-        </text-picker>
+        </app-text-picker>
         <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Get price in US Dollars, Bitcoin, or Etherium where available </span>
     </div>
 

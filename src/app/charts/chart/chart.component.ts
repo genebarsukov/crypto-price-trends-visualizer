@@ -13,24 +13,24 @@ import { ChartSettingsService } from '../../services/settings/chart-settings.ser
 })
 
 export class ChartComponent {
-    protected SVG_WIDTH_MAX = 1800;
-    protected SVG_HEIGHT_MAX = 800;
-    protected SVG_WIDTH_MIN = 600;
-    protected SVG_HEIGHT_MIN = 200;
-    protected SVG_WIDTH_STEP = 300;
-    protected SVG_HEIGHT_STEP = 150;
-    protected svgWidth: number;
-    protected svgHeight: number;
+    SVG_WIDTH_MAX = 1800;
+    SVG_HEIGHT_MAX = 800;
+    SVG_WIDTH_MIN = 600;
+    SVG_HEIGHT_MIN = 200;
+    SVG_WIDTH_STEP = 300;
+    SVG_HEIGHT_STEP = 150;
+    svgWidth: number;
+    svgHeight: number;
 
     constructor(private d3ChartService: D3ChartService,
-                protected chartSettingsService: ChartSettingsService,
+                public chartSettingsService: ChartSettingsService,
                 protected messageService: MessageService) {
         let [width, height] = this.d3ChartService.getSvgSize();
         this.svgWidth = width;
         this.svgHeight = height;
     }
 
-    protected sizeChartUp() {
+    sizeChartUp() {
         if (this.svgWidth < this.SVG_WIDTH_MAX && this.svgHeight < this.SVG_HEIGHT_MAX) {
             this.svgWidth += this.SVG_WIDTH_STEP;
             this.svgHeight += this.SVG_HEIGHT_STEP;
@@ -38,7 +38,7 @@ export class ChartComponent {
         this.d3ChartService.setSvgSize(this.svgWidth, this.svgHeight);
     }
 
-    protected sizeChartDown() {
+    sizeChartDown() {
         if (this.svgWidth > this.SVG_WIDTH_MIN && this.svgHeight > this.SVG_HEIGHT_MIN) {
             this.svgWidth -= this.SVG_WIDTH_STEP;
             this.svgHeight -= this.SVG_HEIGHT_STEP;

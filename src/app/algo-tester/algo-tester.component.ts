@@ -22,7 +22,8 @@ export class AlgoTesterComponent implements OnInit {
         'Stochastic',
         'MACD'
     ];
-    private tradeFees: number[] = [
+    public isLoading = false;
+    public tradeFees: number[] = [
         0,
         0.1,
         0.25,
@@ -34,25 +35,25 @@ export class AlgoTesterComponent implements OnInit {
         4.0,
         5.0
     ];
-    private excludedHeadings: string[] = ['chartType', 'index', 'render'];
-    private indicators: string[] = [];
-    private selectedIndicator!: string;
-    private testResults: any[] = [];
-    private optimizationResults: any[] = [];
-    private algoProfit: number = 0;
-    private chartProfit: number = 0;
-    private profitDiff: number = 0;
-    private profitDiffPercent: string = '';
-    private maxOptimizedProfit: number = 0;
-    private optimizedSettingToRender: any = {};
-    private optimizationExpanded: boolean = false;
-    private lastSortOrder: any = {};
-    private tradeFee: number = 0;       // Trade fees are given as a percentage of total trade cost
-    private coinsPerTrade: number = 1;  // Cost of the inital trade. Currently the same coin amount is assumed for all trades
-    private costPerTrade: number = 0;
+    public excludedHeadings: string[] = ['chartType', 'index', 'render'];
+    public indicators: string[] = [];
+    public selectedIndicator!: string;
+    public testResults: any[] = [];
+    public optimizationResults: any[] = [];
+    public algoProfit: number = 0;
+    public chartProfit: number = 0;
+    public profitDiff: number = 0;
+    public profitDiffPercent: string = '';
+    public maxOptimizedProfit: number = 0;
+    public optimizedSettingToRender: any = {};
+    public optimizationExpanded: boolean = false;
+    public lastSortOrder: any = {};
+    public tradeFee: number = 0;       // Trade fees are given as a percentage of total trade cost
+    public coinsPerTrade: number = 1;  // Cost of the inital trade. Currently the same coin amount is assumed for all trades
+    public costPerTrade: number = 0;
 
 
-    constructor(private chartSettingsService: ChartSettingsService, 
+    constructor(public chartSettingsService: ChartSettingsService, 
                 private d3AlgoTesterService: D3AlgoTesterService,
                 private errorService: ErrorService) {}
 
@@ -92,7 +93,7 @@ export class AlgoTesterComponent implements OnInit {
      * Invoked when a new indicator is picked from the UI
      * @param chartService The service for the indicator that is picked
      */
-    private setSelectedChartService(chartService: string) {
+    setSelectedChartService(chartService: string) {
         this.clearOverlays();
         this.d3AlgoTesterService.setSelectedChartService(chartService);
         this.updateComponent();
@@ -106,7 +107,7 @@ export class AlgoTesterComponent implements OnInit {
      * Invoked when a new trade fee is picked from the UI
      * @param tradeFee The fee that the supposed exchange chardes per trade
      */
-    private setTradeFee(tradeFee: number) {
+    setTradeFee(tradeFee: number) {
         this.d3AlgoTesterService.setTradeFee(tradeFee);
         this.clearOverlays();
         this.updateComponent();
@@ -190,11 +191,11 @@ export class AlgoTesterComponent implements OnInit {
         }
     }
     
-    private closeAlgoTester() {
+    closeAlgoTester() {
         this.onDismissed.emit();
     }
 
-    private toggleOptimization() {
+    toggleOptimization() {
         this.optimizationExpanded = this.optimizationExpanded ? false : true;
     }
 
@@ -253,7 +254,7 @@ export class AlgoTesterComponent implements OnInit {
         return setting;
     }
     
-    private renderSelectedSetting(selectedSetting: any) {
+    renderSelectedSetting(selectedSetting: any) {
         this.optimizedSettingToRender = selectedSetting;
         this.optimizedSettingToRender['render'] = true;
         this.recalculateChartWithNewSettings(this.optimizedSettingToRender);
@@ -277,6 +278,8 @@ export class AlgoTesterComponent implements OnInit {
             return (a: any, b: any) => a[compareProp] < b[compareProp] ? 1 : (a[compareProp] > b[compareProp] ? -1 : 0);
         } else if (sortDirection == 'asc') {
             return (a: any, b: any) => a[compareProp] > b[compareProp] ? 1 : (a[compareProp] < b[compareProp] ? -1 : 0);
+        } else { // desc
+            return (a: any, b: any) => a[compareProp] < b[compareProp] ? 1 : (a[compareProp] > b[compareProp] ? -1 : 0);
         }
     }
 

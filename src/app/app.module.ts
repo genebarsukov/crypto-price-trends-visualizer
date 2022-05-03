@@ -25,15 +25,13 @@ import { TimeSettingsSettingsService } from './services/settings/time-settings-s
 import { UiBuildingBlocksModule } from './ui-building-blocks/ui-building-blocks.module';
 import { MessageService } from './services/message.service';
 import { ChartManagerComponent } from './chart-manager/chart-manager.component';
-import { ObjectPropertiesPipe } from './pipes/object-properties.pipe';
-import { ExcludePipe } from './pipes/exclude.pipe';
 import { FormsModule } from '@angular/forms';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ObjectPropertiesPipe,
-    ExcludePipe,
+    ChartManagerComponent
   ],
   imports: [
     FormsModule,
@@ -45,7 +43,7 @@ import { FormsModule } from '@angular/forms';
     DataSeriesMetaControlsModule,
     ModalsModule,
     UiBuildingBlocksModule,
-    ChartManagerComponent
+    PipesModule
   ],
   providers: [
     ApiService,

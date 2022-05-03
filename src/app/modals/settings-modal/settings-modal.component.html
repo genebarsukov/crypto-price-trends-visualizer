@@ -15,7 +15,7 @@
                     <input type="radio" 
                            name="radio" 
                            [checked]="chartSettingsService.getTheme()=='light'"
-                           [value]='light' 
+                           [value]="'light'"
                            (click)="changeTheme('light')">
                     <span class="radio-checkmark"></span>
                 </label>
@@ -24,7 +24,7 @@
                     <input type="radio"
                            name="radio"
                            [checked]="chartSettingsService.getTheme()=='dark'"
-                           [value]='dark'
+                           [value]="'dark'"
                            (click)="changeTheme('dark')">
                     <span class="radio-checkmark"></span>
                 </label>
@@ -33,7 +33,7 @@
                     <input type="radio"
                     name="radio"
                     [checked]="chartSettingsService.getTheme()==''"
-                    [value]=''
+                    [value]="''"
                     (click)="changeTheme('')">
                     <span class="radio-checkmark"></span>
                 </label>

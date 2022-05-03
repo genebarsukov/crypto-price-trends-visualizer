@@ -23,27 +23,27 @@ export class SettingsModalComponent implements OnInit {
     generalSettings: any = {};
     chartSettings: any = {};
 
-    constructor(private chartSettingsService: ChartSettingsService) {}
+    constructor(public chartSettingsService: ChartSettingsService) {}
 
     ngOnInit() {
         this.chartSettings = this.chartSettingsService.getChartSettings();
         this.generalSettings = this.chartSettingsService.getGeneralSettings();
     }
 
-    private changeTheme(theme: string) {
+    changeTheme(theme: string) {
         this.chartSettingsService.setTheme(theme);
     }
 
-    private toggleSetting(setting: any) {
+    toggleSetting(setting: any) {
         setting.active = setting.active ? false : true;
     }
 
-    private toggleChartSetting(chartSetting: any) {
+    toggleChartSetting(chartSetting: any) {
         chartSetting.active = chartSetting.active ? false : true;
         this.chartSettingsService.setChartSettings(this.chartSettingsService.getChartSettings());
     }
 
-    private dismissModal() {
+    dismissModal() {
         this.chartSettingsService.setSessionData();
         this.onModalDismissed.emit();
     }

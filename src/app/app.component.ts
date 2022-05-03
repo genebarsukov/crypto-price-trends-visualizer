@@ -14,16 +14,16 @@ import { MessageService } from './services/message.service';
 })
 export class AppComponent implements OnInit {
     title = 'Cryptocurrency data analysis tool. Click the ? icon to learn more.'; 
-    private settingsShown: boolean = false;
-    private helpShown: boolean = false;
-    private errorMessage: string = ''
+    public settingsShown: boolean = false;
+    public helpShown: boolean = false;
+    public errorMessage: string = ''
+    public warningClass!: string;
+    public infoMessage: string = ''
+    public infoClass!: string;
     private clearErrorTimer!: number;
-    private warningClass!: string;
-    private infoMessage: string = ''
     private clearInfoTimer!: number;
-    private infoClass!: string;
 
-    constructor(private chartSettingsService: ChartSettingsService,
+    constructor(public chartSettingsService: ChartSettingsService,
                 private errorService: ErrorService,
                 private messageService: MessageService, 
                 private changeDetectorRef: ChangeDetectorRef) {}
@@ -103,11 +103,11 @@ export class AppComponent implements OnInit {
         }, this.clearInfoTimer);
     }
 
-    private toggleSettingsModal() {
+    toggleSettingsModal() {
         this.settingsShown = this.settingsShown ? false : true;
     }
 
-    private toggleHelpModal() {
+    toggleHelpModal() {
         this.helpShown = this.helpShown ? false : true;
     }
 }
