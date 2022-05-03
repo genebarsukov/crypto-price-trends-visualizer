@@ -83,6 +83,7 @@ export class LineSettingsComponent implements OnInit {
 
     ngOnInit() {
         this.updateDisabled();
+        console.log(this.priceLine)
     }
 
     updateDisabled() {

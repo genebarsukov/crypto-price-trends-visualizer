@@ -13,7 +13,7 @@
     position: absolute;
     top: 20%;
     left: 50%;
-    background: url('app/images/bitcoin.png') center no-repeat;
+    background: url('../images/bitcoin.png') center no-repeat;
     width: 128px;
     height: 128px;
     animation: spin 1s linear infinite;
@@ -131,7 +131,7 @@
     background-color: #FFF;
 }
 .light .loading-spinner {
-    background: url('app/images/bitcoin.png') center no-repeat;
+    background: url('../images/bitcoin.png') center no-repeat;
 }
 .light .highlighted {
     background-color: rgba(32, 148, 243, 0.5);
@@ -142,7 +142,7 @@
     background-color: rgba(21, 33, 39, 0.5);
 }
 .dark .loading-spinner {
-    background: url('app/images/bitcoin-gold.png') center no-repeat;
+    background: url('../images/bitcoin-gold.png') center no-repeat;
 }
 .dark .highlighted {
     background-color: rgba(204, 149, 30, 0.5);

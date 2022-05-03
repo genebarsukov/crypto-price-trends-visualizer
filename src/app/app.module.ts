@@ -27,6 +27,7 @@ import { MessageService } from './services/message.service';
 import { ChartManagerComponent } from './chart-manager/chart-manager.component';
 import { FormsModule } from '@angular/forms';
 import { PipesModule } from './pipes/pipes.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PipesModule } from './pipes/pipes.module';
   imports: [
     FormsModule,
     BrowserModule,
+    HttpClientModule,
     DragulaModule,
     AppRoutingModule,
     AlgoTesterModule,

@@ -1,7 +1,9 @@
 <div class="line-settings-control-container" [style.border-color]="priceLine.color" [ngClass]="chartSettingsService.getTheme()">
 
     <div class="tooltip">
-        <color-picker [(ngModel)]="priceLine.color" (ngModelChange)="updateColor(priceLine.color)"></color-picker>
+        <app-color-picker [(ngModel)]="priceLine.color" 
+            (ngModelChange)="updateColor(priceLine.color)">
+        </app-color-picker>
         <span *ngIf="chartSettingsService.getSetting('general', 'tooltips').active" class="tooltiptext"> Change line color </span>
     </div>
     <div class="h-spacer-10"></div>

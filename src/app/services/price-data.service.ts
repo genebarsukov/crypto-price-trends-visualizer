@@ -89,8 +89,8 @@ export class PriceDataService {
     }
 
     private getHistoricalData(priceLine: PriceLine) {
-        let fromSymbol = '';//priceLine.fromSymbol;
-        let toSymbol = '';///priceLine.toSymbol;
+        let fromSymbol = priceLine.fromSymbol;
+        let toSymbol = priceLine.toSymbol;
 
         if ((priceLine.exchange == 'Binance' || priceLine.exchange == 'Cryptopia') && priceLine.toSymbol == 'USD') {
             toSymbol = 'USDT';
@@ -103,7 +103,7 @@ export class PriceDataService {
             .subscribe(
                 response => {
                     if (response) {
-                        priceLine.data = this.formatResponseData(response as PriceData[]);
+                        priceLine.data = this.formatResponseData((response as { Data: PriceData[]; })['Data'] as PriceData[]);
                         this.notifySubs(priceLine);
                     } else {
                         this.notifySubs(priceLine);
@@ -141,8 +141,8 @@ export class PriceDataService {
                             .subscribe(
                                 response => {
                                     if (response) {
-                                        let convertedData = this.convertData(response as any[], priceLine.exchange);
-                                        priceLine.data = this.formatResponseData(response as PriceData[]);
+                                        let convertedData = this.convertData((response as { Data: PriceData[]; })['Data'] as any[], priceLine.exchange);
+                                        priceLine.data = this.formatResponseData((response as { Data: PriceData[]; })['Data'] as PriceData[]);
                                         this.notifySubs(priceLine);
                                     } else {
                                         this.notifySubs(priceLine);
